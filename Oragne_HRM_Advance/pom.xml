@@ -30,7 +30,10 @@
       <version>1.0.0</version>
       <scope>test</scope>
     </dependency>
+    
+    
 
+   
     <dependency>
       <groupId>com.github.detro</groupId>
       <artifactId>phantomjsdriver</artifactId>
@@ -38,7 +41,15 @@
       <scope>test</scope>
     </dependency>
     
-    
+<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+<dependency>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>7.10.2</version>
+    <scope>test</scope>
+</dependency>
+
+
 <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 <dependency>
     <groupId>org.seleniumhq.selenium</groupId>
@@ -46,29 +57,39 @@
     <version>4.25.0</version>
 </dependency>
 
-<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-
+   <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
 <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-core</artifactId>
-    <version>3.0.0-beta2</version>
-    </dependency>
-    
-    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+    <version>3.0.0-alpha1</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/log4j/log4j -->
+<dependency>
+    <groupId>log4j</groupId>
+    <artifactId>log4j</artifactId>
+    <version>1.2.17</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
 <dependency>
     <groupId>org.apache.logging.log4j</groupId>
     <artifactId>log4j-api</artifactId>
-    <version>3.0.0-beta2</version>
+    <version>3.0.0-alpha1</version>
 </dependency>
 
 
-  <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-remote-driver -->
 <dependency>
-    <groupId>org.testng</groupId>
-    <artifactId>testng</artifactId>
-    <version>7.10.2</version>
-    <scope>test</scope>
+    <groupId>org.seleniumhq.selenium</groupId>
+    <artifactId>selenium-remote-driver</artifactId>
+    <version>4.25.0</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+<dependency>
+    <groupId>io.github.bonigarcia</groupId>
+    <artifactId>webdrivermanager</artifactId>
+    <version>5.9.2</version>
+</dependency>
+
 
     <dependency>
       <groupId>com.github.jsdevel</groupId>
