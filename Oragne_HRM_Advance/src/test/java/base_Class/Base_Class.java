@@ -6,11 +6,12 @@ import org.testng.annotations.BeforeMethod;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Base_Class 
+
+public class Base_Class
 
 {
   public WebDriver driver ;
-  
+
   @BeforeMethod
   public void Launch_Chrome()
   {
@@ -18,7 +19,7 @@ public class Base_Class
 	  driver=new ChromeDriver();
 	  driver.manage().window().maximize();
 	  driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
-	  
+
   }
-  
+
 }

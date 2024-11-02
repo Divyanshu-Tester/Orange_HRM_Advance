@@ -15,16 +15,16 @@ public class Page_Objects_Leave
 
 	public WebDriver driver;
 	public WebDriverWait wait;
-	
+
 	public Page_Objects_Leave(WebDriver driver)
 	{
 		this.driver =driver;
 		this.wait= new WebDriverWait(driver,Duration.ofSeconds(15));
 	}
-	
+
 	private By Click_Leave = By.xpath("//a[@class='oxd-main-menu-item active']");
-	
-	
+
+
 	public By Click_Leave_Button()
 	{
 		WebElement Wait_Leave = ((FluentWait<WebDriver>) wait).until(ExpectedConditions.visibilityOfElementLocated(Click_Leave_Button()));

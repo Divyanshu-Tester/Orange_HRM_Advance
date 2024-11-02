@@ -5,26 +5,26 @@ import org.testng.annotations.Test;
 
 import base_Class.Base_Class;
 import pageObjects.Leave.Apply;
-import pageObjects.Leave.Apply_Page_Objects;
-import pageObjects.Leave.Page_Objects_Leave;
+//import pageObjects.Leave.Apply_Page_Objects;
+//import pageObjects.Leave.Page_Objects_Leave;
 import pageObjects.Login.Login_Page_Objects;
 
 public class Dummy_Tests extends Base_Class
 
 
 {
-	
+
   @Test
-  public void f() throws InterruptedException 
-  
-  
+  public void f() throws InterruptedException
+
+
   {
 	  Login_Page_Objects Dummy = new Login_Page_Objects(driver);
-	  Page_Objects_Leave Dummy_Leave = new Page_Objects_Leave(driver);
-	  Apply_Page_Objects Dummy_Apply_Leave = new Apply_Page_Objects(driver);
+	  //Page_Objects_Leave Dummy_Leave = new Page_Objects_Leave(driver);
+	  //Apply_Page_Objects Dummy_Apply_Leave = new Apply_Page_Objects(driver);
 	  Apply Dummy_Apply = new Apply(driver);
-	  
-	  
+
+
 	  Dummy.Default_Username("Admin");
 	  Dummy.Default_Passowrd("admin123");
 	  Dummy.Click_Login();
@@ -42,9 +42,9 @@ public class Dummy_Tests extends Base_Class
 	  Dummy_Apply.PartialDAys(driver);
 	  Dummy_Apply.Add_Comments(driver, null);
 	  Dummy_Apply.Click_Apply(driver);
-	 
-	  
+
+
   }
-  
-  
+
+
 }
