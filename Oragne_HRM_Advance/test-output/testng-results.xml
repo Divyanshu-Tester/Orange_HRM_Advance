@@ -2,20 +2,27 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-10-24T23:19:21 IST" name="Default suite" finished-at="2024-10-24T23:20:33 IST" duration-ms="72405">
+  <suite started-at="2024-11-10T14:09:53 IST" name="CrossFunctionalTesting" finished-at="2024-11-10T14:10:22 IST" duration-ms="29324">
     <groups>
     </groups>
-    <test started-at="2024-10-24T23:19:21 IST" name="Default test" finished-at="2024-10-24T23:20:33 IST" duration-ms="72405">
-      <class name="test_Cases.Dummy_Tests">
-        <test-method is-config="true" signature="Launch_Chrome()[pri:0, instance:test_Cases.Dummy_Tests@1b410b60]" started-at="2024-10-24T23:19:21 IST" name="Launch_Chrome" finished-at="2024-10-24T23:19:36 IST" duration-ms="15381" status="PASS">
+    <test started-at="2024-11-10T14:09:53 IST" name="chrome" finished-at="2024-11-10T14:10:22 IST" duration-ms="29324">
+      <class name="test_Cases.TestApplyLeave">
+        <test-method is-config="true" signature="setup(java.lang.String)[pri:0, instance:test_Cases.TestApplyLeave@5ace1ed4]" started-at="2024-11-10T14:09:53 IST" name="setup" finished-at="2024-11-10T14:09:57 IST" duration-ms="4230" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- Launch_Chrome -->
-        <test-method signature="f()[pri:0, instance:test_Cases.Dummy_Tests@1b410b60]" started-at="2024-10-24T23:19:36 IST" name="f" finished-at="2024-10-24T23:20:33 IST" duration-ms="56870" status="PASS">
+        </test-method> <!-- setup -->
+        <test-method signature="applyLeaveWithMandatoryFields()[pri:0, instance:test_Cases.TestApplyLeave@5ace1ed4]" started-at="2024-11-10T14:09:57 IST" name="applyLeaveWithMandatoryFields" finished-at="2024-11-10T14:10:22 IST" duration-ms="25054" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- f -->
-      </class> <!-- test_Cases.Dummy_Tests -->
-    </test> <!-- Default test -->
-  </suite> <!-- Default suite -->
+        </test-method> <!-- applyLeaveWithMandatoryFields -->
+      </class> <!-- test_Cases.TestApplyLeave -->
+    </test> <!-- chrome -->
+  </suite> <!-- CrossFunctionalTesting -->
 </testng-results>

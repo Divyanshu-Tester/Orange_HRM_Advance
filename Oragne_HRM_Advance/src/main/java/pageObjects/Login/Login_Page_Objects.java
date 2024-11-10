@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import Utilities.ConfigReader;
+import pageObjects.Dashboard.Page_Object_Dashboard;
 
 public class Login_Page_Objects 
 
@@ -31,6 +33,10 @@ public class Login_Page_Objects
 	private By Login_Button = By.xpath("//button[@type='submit']");        
 	private By Forget_Password = By.xpath("//p[@class='oxd-text oxd-text--p orangehrm-login-forgot-header']");        //FORGET PASSOWORD
 	
+	
+	public void loadLoginPage() {
+		driver.get(ConfigReader.getConfigPropertyData("url"));
+	}
 	//RE-USABLE METHOD FOR USERNAME
 	
 	public void Default_Username(String username)
@@ -55,9 +61,11 @@ public class Login_Page_Objects
 	
 	//RE-USABLE METHOD TO CLICK ON LOGIN BUTTON
 	
-	public void Click_Login()
+	public Page_Object_Dashboard Click_Login()
 	{
 		driver.findElement(Login_Button).click();
+		Page_Object_Dashboard dashboardPage= new Page_Object_Dashboard(driver);
+		return dashboardPage;
 	}
 	
 	//RE-USABLE METHOD TO CLICK ON THE FORGET PASSOWRD LINK 
