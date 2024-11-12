@@ -9,17 +9,19 @@ import pageObjects.Dashboard.Page_Object_Dashboard;
 public class TestApplyLeave extends Base_Class {
 	@Test(priority = 0)
 	public void applyLeaveWithMandatoryFields() throws InterruptedException {
-		loginPage.loadLoginPage();
-		loginPage.Default_Username(ConfigReader.getConfigPropertyData("username"));
-		loginPage.Default_Passowrd(ConfigReader.getConfigPropertyData("password"));
-		Page_Object_Dashboard dashboardPage = loginPage.Click_Login();
-		Assert.assertEquals(dashboardPage.dashboardLoaded(), "Dashboard");
+	    // **Arrange**: Prepare for the test by navigating to the Apply Leave page
 		dashboardPage.clickOnLeaveTab();
 		leaveListPage.clickOnApplyTab();
+		
+	    // Assert that Apply Leave page is loaded
 		System.out.println(applyLeavePage.applyleavePageLoaded());
-		Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave");
+		Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
+		
+	    // **Act**: Perform the action of applying leave
 		applyLeave();
 
+	    // **Assert**: Verify that leave application was successful
+		Assert.assertTrue(leaveListPage.leaveListPageWithRecords(),"Leave records were not found after applying leave!");
 	}
 
 }
