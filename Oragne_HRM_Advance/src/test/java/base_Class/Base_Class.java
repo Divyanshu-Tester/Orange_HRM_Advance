@@ -37,16 +37,17 @@ public class Base_Class extends DriverFactory
 		loginPage.loadLoginPage();
 		loginPage.Default_Username(ConfigReader.getConfigPropertyData("username"));
 		loginPage.Default_Passowrd(ConfigReader.getConfigPropertyData("password"));
-		Page_Object_Dashboard  dashboardPage =	loginPage.Click_Login();
+		dashboardPage =	loginPage.Click_Login();
 		Assert.assertEquals(dashboardPage.dashboardLoaded(), "Dashboard","Dashboard did not load sucessfully");
 
 	}
 
 	// resuable method for apply leave
 	public void applyLeave() throws InterruptedException {
+	
 		applyLeavePage.selectLeaveType();
-		applyLeavePage.selectFromDate(ConfigReader.getConfigPropertyData("startDate"));
-		applyLeavePage.selectToDate(ConfigReader.getConfigPropertyData("endDate"));
+		applyLeavePage.selectFromDate(ConfigReader.getConfigPropertyData("startDate"),ConfigReader.getConfigPropertyData("monthName"));
+		applyLeavePage.selectToDate(ConfigReader.getConfigPropertyData("endDate"),ConfigReader.getConfigPropertyData("monthName"));
 		applyLeavePage.clickApplyLeave();
 	}
 

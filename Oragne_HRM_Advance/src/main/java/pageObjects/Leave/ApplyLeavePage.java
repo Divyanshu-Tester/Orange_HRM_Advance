@@ -55,7 +55,14 @@ public class ApplyLeavePage extends BrowserUtilities{
 	@FindBy(xpath="//div[@class='oxd-calendar-date']")
 	List<WebElement> listOfAllDays;
 	
-
+	@FindBy(xpath="//div[@class='oxd-calendar-selector-month-selected']/p")
+	WebElement getSelectedMonth;
+	
+	@FindBy(xpath="//button[@class='oxd-icon-button'] //i[contains(@class,'bi-chevron-right')]")
+	WebElement chooseNextMonth;
+	
+	@FindBy(xpath="//button[@class='oxd-icon-button'] //i[contains(@class,'bi-chevron-left')]")
+	WebElement choosePreviousMonth;
 	
     @FindBy(xpath = "//button[@type='submit']")
 	WebElement submitBtn;
@@ -66,6 +73,7 @@ public class ApplyLeavePage extends BrowserUtilities{
 	}
 	
 	public String selectLeaveType() {
+		staticWait(1);
 		clickLeaveTypeField.click();
 		leaveTypeDropdown.click();
 	return 	getSelectedLeaveType.getText();
@@ -75,34 +83,13 @@ public class ApplyLeavePage extends BrowserUtilities{
 
 	
 	
-    public void selectFromDate(String day) {
-    	clickOnStartDateField.click();
-    	System.out.println(listOfAllDays.size());
-    	for(int i=0;i<listOfAllDays.size();i++) {
-    		String calendarDay=listOfAllDays.get(i).getText();
-    		if(calendarDay.equals(day)) {
-    			listOfAllDays.get(i).click();
-    			break;
-    		}
-    	}
+    public void selectFromDate(String day,String month) {
+    	BrowserUtilities.selectDateFromCalendar(month,driver,clickOnStartDateField, listOfAllDays, day,getSelectedMonth,chooseNextMonth);
       
     }
 
-    public void selectToDate(String day) throws InterruptedException {
-    	clickOnEndDateField.click();
-    	Thread.sleep(2000);
-    	System.out.println(listOfAllDays.size() +"size is");
-    	for(int i=0;i<listOfAllDays.size();i++) {
-    		String calendarDay=listOfAllDays.get(i).getText();
-    		try {
-    		if(calendarDay.equals(day)) {
-    			listOfAllDays.get(i).click();
-    			break;
-    		}
-    	}
-    	catch(Exception e) {
-    		System.out.println(e.getStackTrace());
-    	}}
+    public void selectToDate(String day,String month)  {
+    	BrowserUtilities.selectDateFromCalendar(month,driver,clickOnEndDateField, listOfAllDays, day,getSelectedMonth,chooseNextMonth);
       
     }
     

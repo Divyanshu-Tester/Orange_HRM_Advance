@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BrowserUtilities {
+	
+	static String selectedmonth ;
 	public static void staticWait(int sleepTimeInSeconds) {
 		try {
 			Thread.sleep(sleepTimeInSeconds * 1000L);
@@ -23,10 +25,34 @@ public class BrowserUtilities {
 		wait.until(ExpectedConditions.visibilityOf(element));
 
 	}
+	
+	//reusable selelctdate function
+	public static void selectDateFromCalendar(String month,WebDriver driver,WebElement calendarField, List<WebElement> listOfDays, String day,WebElement selectedMonth,WebElement chooseMonth) {
+		calendarField.click();
+		
+		waitForElementsVisible(driver,2,listOfDays);
+		 selectedmonth=selectedMonth.getText();
+		System.out.println(selectedmonth);
+		while(!(selectedMonth.getText().equals(month))) {
+			chooseMonth.click();
+		}
+    	System.out.println(listOfDays.size());
+    	for(int i=0;i<listOfDays.size();i++) {
+    		String calendarDay=listOfDays.get(i).getText();
+    		try {
+    		if(calendarDay.equals(day)) {
+    			listOfDays.get(i).click();
+    			break;
+    		}
+    	}
+    	catch(Exception e) {
+    		System.out.println(e.getStackTrace());
+    	}}
+	}
 
-	public List<WebElement> waitForElementsVisible(WebDriver driver, int timeout, List<WebElement> locator) {
+	public static void  waitForElementsVisible(WebDriver driver, int timeout, List<WebElement> locator) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
-		return wait.until(ExpectedConditions.visibilityOfAllElements(locator));
+		 wait.until(ExpectedConditions.visibilityOfAllElements(locator));
 	}
 
 	public void scrollPage(int x, int y, WebDriver driver) {

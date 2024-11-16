@@ -5,7 +5,7 @@
   <test thread-count="5" name="chrome">
   <parameter name="browserName" value="chrome"></parameter>
     <classes>
-      <class name="test_Cases.TestApplyLeave"/>
+      <class name="test_Cases.TestLeaveList"/>
     
     </classes>
   </test> <!-- Test -->

@@ -14,7 +14,7 @@ public class Login_Page_Objects
 
 {
 
-	private WebDriver driver;
+	public WebDriver driver;
 	public WebDriverWait wait;
 	
 	//CREATING CONSTRUCTOR TO INITIALIZE THE WEBDRIVER 

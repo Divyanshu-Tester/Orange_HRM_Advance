@@ -4,12 +4,12 @@
   <test thread-count="5" name="chrome(failed)">
     <parameter name="browserName" value="chrome"/>
     <classes>
-      <class name="test_Cases.TestApplyLeave">
+      <class name="test_Cases.TestLeaveList">
         <methods>
           <include name="setup"/>
-          <include name="applyLeaveWithMandatoryFields"/>
+          <include name="verifyResetDateFilter"/>
         </methods>
-      </class> <!-- test_Cases.TestApplyLeave -->
+      </class> <!-- test_Cases.TestLeaveList -->
     </classes>
   </test> <!-- chrome(failed) -->
 </suite> <!-- Failed suite [CrossFunctionalTesting] -->
