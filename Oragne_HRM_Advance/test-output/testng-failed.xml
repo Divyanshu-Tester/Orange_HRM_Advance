@@ -3,12 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="test_Cases.Dummy_Tests">
+      <class name="test_Cases.TC_Leave_List">
         <methods>
           <include name="f"/>
           <include name="Launch_Chrome"/>
         </methods>
-      </class> <!-- test_Cases.Dummy_Tests -->
+      </class> <!-- test_Cases.TC_Leave_List -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

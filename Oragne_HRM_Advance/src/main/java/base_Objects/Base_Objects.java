@@ -16,12 +16,13 @@ public class Base_Objects
 
 
 	//INITIALIZING THE CONSTRUCTOR FOR WEBDRIVER AND WAITS
-	public Base_Objects()
+	public Base_Objects(WebDriver driver)
 	{
 
 		this.driver = driver;
 		this.wait= new WebDriverWait(driver,Duration.ofSeconds(15));
 		this.fluentWait = new FluentWait<>(driver).withTimeout(Duration.ofSeconds(15)).pollingEvery(Duration.ofSeconds(0)).ignoring(Exception.class);
+		
 
 	}
 
