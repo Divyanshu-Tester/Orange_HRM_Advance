@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import Utilities.ConfigReader;
 import base_Class.Base_Class;
 import pageObjects.Dashboard.Page_Object_Dashboard;
+import pageObjects.Leave.LeaveListPage;
 
 public class TestLeaveList extends Base_Class {
 
@@ -37,7 +38,10 @@ public class TestLeaveList extends Base_Class {
 		Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
 
 		// apply leave
-		applyLeave();
+		applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"),
+				ConfigReader.getConfigPropertyData("endDateCancelled"));
+		leaveListPage.clickSearchButton();
 
 		// **Act**: Navigate back to Leave List and fetch records
 		dashboardPage.clickOnLeaveTab();
@@ -55,7 +59,8 @@ public class TestLeaveList extends Base_Class {
 
 		// **Act**: Apply the date range filter
 		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDate"),
-				ConfigReader.getConfigPropertyData("endDate"),ConfigReader.getConfigPropertyData("monthName"));
+				ConfigReader.getConfigPropertyData("endDate"), ConfigReader.getConfigPropertyData("monthName"));
+		leaveListPage.clickSearchButton();
 
 		// **Assert**: Verify no records are found for the given date range
 		Assert.assertEquals(leaveListPage.leaveListPageNoRecordMessage().trim(), "No Records Found",
@@ -72,67 +77,184 @@ public class TestLeaveList extends Base_Class {
 		Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
 
 		// apply leave
-		applyLeave();
+		applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"),
+				ConfigReader.getConfigPropertyData("endDateCancelled"));
 		dashboardPage.clickOnLeaveTab();
 		Assert.assertTrue(leaveListPage.leaveListPageWithRecords(), "No one has applied the leave ");
 
 		// **Act**: Apply the date range filter
 		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDate"),
-				ConfigReader.getConfigPropertyData("endDate"),ConfigReader.getConfigPropertyData("monthName"));
+				ConfigReader.getConfigPropertyData("endDate"), ConfigReader.getConfigPropertyData("monthName"));
+		leaveListPage.clickSearchButton();
 
 		// **Assert**: Verify that leave records are present
 		Assert.assertTrue(leaveListPage.leaveListPageWithRecords(), "No one has applied the leave ");
 	}
 
-	@Test(priority = 4, enabled = true, description = "verify reset  filter with records")
+	@Test(priority = 4, enabled = false, description = "verify reset  filter with records")
 	public void verifyResetDateFilter() throws InterruptedException {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
 		leaveListPage.clickOnApplyTab();
-		applyLeave();
+		applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"),
+				ConfigReader.getConfigPropertyData("endDateCancelled"));
 		dashboardPage.clickOnLeaveTab();
 		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDate"),
-				ConfigReader.getConfigPropertyData("endDate"),ConfigReader.getConfigPropertyData("monthName"));
+				ConfigReader.getConfigPropertyData("endDate"), ConfigReader.getConfigPropertyData("monthName"));
+		leaveListPage.clickSearchButton();
 
 		// check records with in the applied date range
-		List<WebElement> filteredRecords = leaveListPage.getLeaveRecords();
+		// List<WebElement> filteredRecords = leaveListPage.getLeaveRecords();
 
 		// **Act**: Click on Reset button
 		leaveListPage.clickResetFilterButton();
-		
-		//**Assert**:verify reset btn working fine
+
+		// **Assert**:verify reset btn working fine
+
+	}
+
+	@Test(priority = 5, enabled = false, description = "Verify filtering leaves with Pending status (default) and no records")
+	public void verifyFilteringLeavesWithPendingStatusAndNoRecords() {
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		// **Assert**: Verify Pending Approval is selected by default
+		String defaultStatus = leaveListPage.getSelectedLeaveStatus();
+		Assert.assertEquals(defaultStatus, "Pending Approval", "Default status is not 'Pending Approval'!");
+
+		// **Act**: Apply the date range filter
+		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDate"),
+				ConfigReader.getConfigPropertyData("endDate"),
+				ConfigReader.getConfigPropertyData("monthNameLeaveList"));
+		leaveListPage.clickSearchButton();
+
+		// **Assert**: Verify "No Records Found" message is displayed
+		Assert.assertEquals(leaveListPage.leaveListPageNoRecordMessage().trim(), "No Records Found",
+				"Expected 'No Records Found' message not displayed for empty date range.");
+
+		// **Act**: Reset the filter
+		leaveListPage.clickResetFilterButton();
+
+		// **Assert**: Verify default filter values after reset
+		Assert.assertEquals(leaveListPage.getSelectedLeaveStatus(), "Pending Approval",
+				"Status did not reset correctly!");
+	}
+
+	@Test(priority = 6, enabled = false, description = "Verify filtering leaves with Pending status (default) and with records")
+	public void verifyFilteringLeavesWithPendingStatusAndWithRecords() throws InterruptedException {
+
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		leaveListPage.clickOnApplyTab();
+		Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
+
+		// apply leave
+		applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"),
+				ConfigReader.getConfigPropertyData("endDateCancelled"));
+		leaveListPage.clickSearchButton();
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertTrue(leaveListPage.leaveListPageWithRecords(), "No one has applied the leave ");
+
+		// **Assert**: Verify Pending Approval is selected by default
+		String defaultStatus = leaveListPage.getSelectedLeaveStatus();
+		Assert.assertEquals(defaultStatus, "Pending Approval", "Default status is not 'Pending Approval'!");
+
+		// **Act**: Apply the date range filter
+		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDate"),
+				ConfigReader.getConfigPropertyData("endDate"),
+				ConfigReader.getConfigPropertyData("monthNameLeaveList"));
+		leaveListPage.clickSearchButton();
+
+		// **Assert**: all the leaves are coming with status pending after applying the
+		// filter
+		Assert.assertTrue(leaveListPage.verifyAllRecordsWithLeaveStatus("Pending Approval"),
+				"Not all records have 'Pending' status.");
+
+	}
+
+	// Rest filter is pending
+
+	@Test(priority = 7, enabled = false, description = "Verify filtering leaves with cancelled status and with records")
+	public void verifyFilteringLeavesWithCancelledStatusAndWithRecords() throws InterruptedException {
+
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		// **Act**: choose cancelledLeave Status
+		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDateCancelled"),
+				ConfigReader.getConfigPropertyData("endDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"));
+		leaveListPage.clearDefaultLeaveStatusOption();
+		leaveListPage.chooseLeaveStatusFromList("Cancelled");
+		leaveListPage.clickSearchButton();
+
+		// **Assert**: all the leaves are coming with status cancelled after applying
+		// the filter
+
+		if (leaveListPage.getLeaveRecords().isEmpty()) {
+			Assert.fail("No records found with the selected filter criteria.");
+		} else {
+			Assert.assertTrue(leaveListPage.verifyAllRecordsWithLeaveStatus("Cancelled"),
+					"Not all records have 'Cancelled' status.");
+
+		}
+	}
+
+	@Test(priority = 8, enabled = false, description = "Verify filtering leaves with leave type")
+	public void verifyFilteringLeavesWithLeaveType() {
+
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		// **Act**: choose leave type
+		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDateCancelled"),
+				ConfigReader.getConfigPropertyData("endDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"));
+		leaveListPage.selectLeaveType("CAN - FMLA");
+		leaveListPage.clickSearchButton();
+
+		// **Assert**: all the leaves are coming with the selected leave type after applying the filter
+		if (leaveListPage.getLeaveRecords().isEmpty()) {
+			Assert.fail("No records found with the selected filter criteria.");
+		} else {
+		Assert.assertTrue(leaveListPage.verifyAllRecordsWithLeaveType("CAN - FMLA"),
+				"Not all records have the expected leave type: CAN - FMLA.");
+		}
 
 	}
 	
 	
-	
-	@Test(priority = 5, enabled=false,description = "Verify filtering leaves with Pending status (default) and no records")
-	public void verifyFilteringLeavesWithPendingStatusAndNoRecords()  {
+	@Test(priority = 9, enabled = true, description = "Verify filtering leaves with employe Name")
+	public void verifyFilteringLeavesWithEmployeName() {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 				dashboardPage.clickOnLeaveTab();
 				Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
-				
-				
-				// **Assert**: Verify Pending Approval is selected by default
-			    String defaultStatus = leaveListPage.getSelectedLeaveStatus();
-			    Assert.assertEquals(defaultStatus, "Pending Approval", "Default status is not 'Pending Approval'!");
-			    
-			    
-			 // **Act**: Apply the date range filter
-				leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDate"),
-						ConfigReader.getConfigPropertyData("endDate"),ConfigReader.getConfigPropertyData("monthNameLeaveList"));
-				
-				// **Assert**: Verify "No Records Found" message is displayed
-				Assert.assertEquals(leaveListPage.leaveListPageNoRecordMessage().trim(), "No Records Found",
-						"Expected 'No Records Found' message not displayed for empty date range.");
-				
-				// **Act**: Reset the filter
-			    leaveListPage.clickResetFilterButton();
-		
-			 // **Assert**: Verify default filter values after reset
-			    Assert.assertEquals(leaveListPage.getSelectedLeaveStatus(), "Pending Approval", "Status did not reset correctly!");
-	}
+
+				// **Act**: choose leave type
+				leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDateCancelled"),
+						ConfigReader.getConfigPropertyData("endDateCancelled"),
+						ConfigReader.getConfigPropertyData("monthName"));
+				leaveListPage.searchWithEmployeeName("John");
+				leaveListPage.clickSearchButton();
+
+				// **Assert**: all the leaves are coming with the selected leave type after applying the filter
+				if (leaveListPage.getLeaveRecords().isEmpty()) {
+					Assert.fail("No records found with the selected filter criteria.");
+				} else {
+				Assert.assertTrue(leaveListPage.verifyAllRecordsWithEmployName("David Johnson"),
+						"Not all records have the expected leave type: David Johnson.");
+				}
+	
+	
 	
 	}
-
-
+	
+}

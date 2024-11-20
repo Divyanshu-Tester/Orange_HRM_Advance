@@ -23,7 +23,11 @@ public class BrowserUtilities {
 	public void waitElementToVisible(WebDriver driver, int time, WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
 		wait.until(ExpectedConditions.visibilityOf(element));
-
+	}
+	
+	public void waitElementToBeClickable(WebDriver driver, int time, WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+	wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 	
 	//reusable selelctdate function
@@ -51,8 +55,11 @@ public class BrowserUtilities {
 	}
 
 	public static void  waitForElementsVisible(WebDriver driver, int timeout, List<WebElement> locator) {
+		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
 		 wait.until(ExpectedConditions.visibilityOfAllElements(locator));
+		 
+	
 	}
 
 	public void scrollPage(int x, int y, WebDriver driver) {

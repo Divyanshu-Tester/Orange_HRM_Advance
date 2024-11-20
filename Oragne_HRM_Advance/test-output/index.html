@@ -103,7 +103,7 @@
                     <div class="method-list-content failed suite-CrossFunctionalTesting">
                       <span>
                         <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-CrossFunctionalTesting" title="test_Cases.TestLeaveList" class="method navigator-link" hash-for-method="verifyResetDateFilter">verifyResetDateFilter</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-CrossFunctionalTesting" title="test_Cases.TestLeaveList" class="method navigator-link" hash-for-method="verifyFilteringLeavesWithEmployeName">verifyFilteringLeavesWithEmployeName</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-CrossFunctionalTesting -->
@@ -126,41 +126,16 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="verifyResetDateFilter">
-                  </a> <!-- verifyResetDateFilter -->
-                  <span class="method-name">verifyResetDateFilter</span>
-                  <div class="stack-trace">org.openqa.selenium.NoSuchElementException: no such element: Unable to locate element: {&quot;method&quot;:&quot;xpath&quot;,&quot;selector&quot;:&quot;(//div[@class=&apos;oxd-date-input&apos;]/input)[1]&quot;}
-  (Session info: chrome=131.0.6778.69)
-For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
-Build info: version: &apos;4.25.0&apos;, revision: &apos;8a8aea2337&apos;
-System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;23&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [b0bed0ff68404e740ce6c218ed56e001, findElement {using=xpath, value=(//div[@class=&apos;oxd-date-input&apos;]/input)[1]}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 131.0.6778.69, chrome: {chromedriverVersion: 131.0.6778.69 (77e2244bbcda..., userDataDir: C:\Users\RAMITA~1\AppData\L...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:50983}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:50983/devtoo..., se:cdpVersion: 131.0.6778.69, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: b0bed0ff68404e740ce6c218ed56e001
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:190)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
-	at org.openqa.selenium.remote.ElementLocation$ElementFinder$2.findElement(ElementLocation.java:165)
-	at org.openqa.selenium.remote.ElementLocation.findElement(ElementLocation.java:59)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:368)
-	at org.openqa.selenium.remote.RemoteWebDriver.findElement(RemoteWebDriver.java:362)
-	at org.openqa.selenium.support.pagefactory.DefaultElementLocator.findElement(DefaultElementLocator.java:68)
-	at org.openqa.selenium.support.pagefactory.internal.LocatingElementHandler.invoke(LocatingElementHandler.java:38)
-	at jdk.proxy2/jdk.proxy2.$Proxy12.click(Unknown Source)
-	at Utilities.BrowserUtilities.selectDateFromCalendar(BrowserUtilities.java:31)
-	at pageObjects.Leave.LeaveListPage.selectFromDate(LeaveListPage.java:126)
-	at pageObjects.Leave.LeaveListPage.applyDateFilter(LeaveListPage.java:136)
-	at test_Cases.TestLeaveList.verifyResetDateFilter(TestLeaveList.java:94)
+                  <a name="verifyFilteringLeavesWithEmployeName">
+                  </a> <!-- verifyFilteringLeavesWithEmployeName -->
+                  <span class="method-name">verifyFilteringLeavesWithEmployeName</span>
+                  <div class="stack-trace">java.lang.AssertionError: No records found with the selected filter criteria.
+	at test_Cases.TestLeaveList.verifyFilteringLeavesWithEmployeName(TestLeaveList.java:250)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-... Removed 28 stack frames
+... Removed 26 stack frames
 </div> <!-- stack-trace -->
                   <em>
-(verify reset  filter with records)                  </em>
+(Verify filtering leaves with employe Name)                  </em>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -175,7 +150,7 @@ Session ID: b0bed0ff68404e740ce6c218ed56e001
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;!DOCTYPE suite SYSTEM &quot;https://testng.org/testng-1.0.dtd&quot;&gt;
 &lt;suite name=&quot;CrossFunctionalTesting&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
-  &lt;test thread-count=&quot;5&quot; name=&quot;chrome&quot;&gt;
+  &lt;test thread-count=&quot;2&quot; name=&quot;chrome&quot;&gt;
     &lt;parameter name=&quot;browserName&quot; value=&quot;chrome&quot;/&gt;
     &lt;classes&gt;
       &lt;class name=&quot;test_Cases.TestLeaveList&quot;/&gt;
@@ -220,14 +195,14 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(1);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'verifyResetDateFilter')
+data.setCell(0, 1, 'verifyFilteringLeavesWithEmployeName')
 data.setCell(0, 2, 'test_Cases.TestLeaveList')
-data.setCell(0, 3, 12006);
+data.setCell(0, 3, 9866);
 window.suiteTableData['CrossFunctionalTesting']= { tableData: data, tableDiv: 'times-div-CrossFunctionalTesting'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 12 seconds</span>
+              <span class="suite-total-time">Total running time: 9 seconds</span>
               <div id="times-div-CrossFunctionalTesting">
               </div> <!-- times-div-CrossFunctionalTesting -->
             </div> <!-- times-div -->
@@ -242,21 +217,29 @@ return data;
         </div> <!-- panel -->
         <div panel-name="ignored-methods-CrossFunctionalTesting" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">5 ignored methods</span>
+            <span class="header-content">9 ignored methods</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="ignored-class-div">
               <span class="ignored-class-name">test_Cases.TestLeaveList</span>
               <div class="ignored-methods-div">
-                <span class="ignored-method-name">verifyLeaveListPageShowsNoRecords</span>
+                <span class="ignored-method-name">verifyFilteringLeavesWithPendingStatusAndWithRecords</span>
                 <br/>
                 <span class="ignored-method-name">verifyLeaveListPageShowsRecords</span>
                 <br/>
-                <span class="ignored-method-name">verifyFilteringLeaveWithRecords</span>
+                <span class="ignored-method-name">verifyFilteringLeavesWithLeaveType</span>
+                <br/>
+                <span class="ignored-method-name">verifyFilteringLeavesWithCancelledStatusAndWithRecords</span>
                 <br/>
                 <span class="ignored-method-name">verifyFilteringLeaveWithNoRecords</span>
                 <br/>
                 <span class="ignored-method-name">verifyFilteringLeavesWithPendingStatusAndNoRecords</span>
+                <br/>
+                <span class="ignored-method-name">verifyFilteringLeaveWithRecords</span>
+                <br/>
+                <span class="ignored-method-name">verifyResetDateFilter</span>
+                <br/>
+                <span class="ignored-method-name">verifyLeaveListPageShowsNoRecords</span>
                 <br/>
               </div> <!-- ignored-methods-div -->
             </div> <!-- ignored-class-div -->
@@ -276,8 +259,8 @@ return data;
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">verifyResetDateFilter</span>
-                <span class="method-start">10976 ms</span>
+                <span class="method-name">verifyFilteringLeavesWithEmployeName</span>
+                <span class="method-start">12910 ms</span>
               </div> <!-- test-method -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

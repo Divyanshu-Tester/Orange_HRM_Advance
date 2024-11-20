@@ -43,11 +43,11 @@ public class Base_Class extends DriverFactory
 	}
 
 	// resuable method for apply leave
-	public void applyLeave() throws InterruptedException {
+	public void applyLeave(String startDate, String endDate,String monthName) throws InterruptedException {
 	
 		applyLeavePage.selectLeaveType();
-		applyLeavePage.selectFromDate(ConfigReader.getConfigPropertyData("startDate"),ConfigReader.getConfigPropertyData("monthName"));
-		applyLeavePage.selectToDate(ConfigReader.getConfigPropertyData("endDate"),ConfigReader.getConfigPropertyData("monthName"));
+		applyLeavePage.selectFromDate(startDate,monthName);
+		applyLeavePage.selectToDate(endDate,monthName);
 		applyLeavePage.clickApplyLeave();
 	}
 

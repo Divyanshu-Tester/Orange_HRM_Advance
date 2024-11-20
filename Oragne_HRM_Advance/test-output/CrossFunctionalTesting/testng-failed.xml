@@ -7,7 +7,7 @@
       <class name="test_Cases.TestLeaveList">
         <methods>
           <include name="setup"/>
-          <include name="verifyResetDateFilter"/>
+          <include name="verifyFilteringLeavesWithEmployeName"/>
         </methods>
       </class> <!-- test_Cases.TestLeaveList -->
     </classes>

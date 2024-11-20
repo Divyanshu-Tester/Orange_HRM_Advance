@@ -18,7 +18,8 @@ public class TestApplyLeave extends Base_Class {
 		Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
 		
 	    // **Act**: Perform the action of applying leave
-		applyLeave();
+		applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),ConfigReader.getConfigPropertyData("monthName"),
+				ConfigReader.getConfigPropertyData("endDateCancelled"));
 
 	    // **Assert**: Verify that leave application was successful
 		Assert.assertTrue(leaveListPage.leaveListPageWithRecords(),"Leave records were not found after applying leave!");
