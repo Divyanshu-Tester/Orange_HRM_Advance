@@ -55,11 +55,11 @@ function toggleAllBoxes() {
 <body>
 <h2 align='center'>chrome</h2><table border='1' align="center">
 <tr>
-<td>Tests passed/Failed/Skipped:</td><td>0/1/0</td>
+<td>Tests passed/Failed/Skipped:</td><td>8/1/0</td>
 </tr><tr>
-<td>Started on:</td><td>Sun Nov 17 17:15:15 IST 2024</td>
+<td>Started on:</td><td>Sat Nov 23 15:38:40 IST 2024</td>
 </tr>
-<tr><td>Total time:</td><td>22 seconds (22805 ms)</td>
+<tr><td>Total time:</td><td>254 seconds (254076 ms)</td>
 </tr><tr>
 <td>Included groups:</td><td></td>
 </tr><tr>
@@ -77,13 +77,22 @@ function toggleAllBoxes() {
 </tr>
 <tr>
 <td title='test_Cases.TestLeaveList.verifyFilteringLeavesWithEmployeName()'><b>verifyFilteringLeavesWithEmployeName</b><br>Test class: test_Cases.TestLeaveList<br>Test method: Verify filtering leaves with employe Name</td>
-<td><div><pre>java.lang.AssertionError: No records found with the selected filter criteria.
-	at test_Cases.TestLeaveList.verifyFilteringLeavesWithEmployeName(TestLeaveList.java:250)
+<td><div><pre>java.util.NoSuchElementException: No element found with name: John
+	at pageObjects.Leave.LeaveListPage.lambda$3(LeaveListPage.java:286)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at pageObjects.Leave.LeaveListPage.searchWithEmployeeName(LeaveListPage.java:286)
+	at test_Cases.TestLeaveList.verifyFilteringLeavesWithEmployeName(TestLeaveList.java:246)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
-... Removed 26 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace407263135", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
-<div class='stack-trace' id='stack-trace407263135'><pre>java.lang.AssertionError: No records found with the selected filter criteria.
-	at org.testng.Assert.fail(Assert.java:111)
-	at test_Cases.TestLeaveList.verifyFilteringLeavesWithEmployeName(TestLeaveList.java:250)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+... Removed 15 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1044081002", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1044081002'><pre>java.util.NoSuchElementException: No element found with name: John
+	at pageObjects.Leave.LeaveListPage.lambda$3(LeaveListPage.java:286)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at pageObjects.Leave.LeaveListPage.searchWithEmployeeName(LeaveListPage.java:286)
+	at test_Cases.TestLeaveList.verifyFilteringLeavesWithEmployeName(TestLeaveList.java:246)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
@@ -98,21 +107,64 @@ function toggleAllBoxes() {
 	at org.testng.TestRunner.privateRun(TestRunner.java:739)
 	at org.testng.TestRunner.run(TestRunner.java:614)
 	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-	at org.testng.TestNG.runSuites(TestNG.java:1112)
-	at org.testng.TestNG.run(TestNG.java:1079)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
 </pre></div></td>
-<td>9</td>
-<td>test_Cases.TestLeaveList@1613674b</td></tr>
+<td>10</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeavesWithLeaveType()'><b>verifyFilteringLeavesWithLeaveType</b><br>Test class: test_Cases.TestLeaveList<br>Test method: Verify filtering leaves with leave type</td>
+<td></td>
+<td>8</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyLeaveListPageShowsNoRecords()'><b>verifyLeaveListPageShowsNoRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: verify that leave list page loads successfully with no records</td>
+<td></td>
+<td>7</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeaveWithNoRecords()'><b>verifyFilteringLeaveWithNoRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: verify date range filter with no records</td>
+<td></td>
+<td>7</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeavesWithPendingStatusAndWithRecords()'><b>verifyFilteringLeavesWithPendingStatusAndWithRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: Verify filtering leaves with Pending status (default) and with records</td>
+<td></td>
+<td>22</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeaveWithRecords()'><b>verifyFilteringLeaveWithRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: verify date range filter with records</td>
+<td></td>
+<td>21</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyLeaveListPageShowsRecords()'><b>verifyLeaveListPageShowsRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: verify that leave list page loads successfully with records</td>
+<td></td>
+<td>15</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeavesWithCancelledStatusAndWithRecords()'><b>verifyFilteringLeavesWithCancelledStatusAndWithRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: Verify filtering leaves with cancelled status and with records</td>
+<td></td>
+<td>8</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeavesWithPendingStatusAndNoRecords()'><b>verifyFilteringLeavesWithPendingStatusAndNoRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: Verify filtering leaves with Pending status (default) and no records</td>
+<td></td>
+<td>7</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
 </table><p>
 </body>
 </html>

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
@@ -24,10 +25,11 @@ public class Base_Class extends DriverFactory
 	public Page_Object_Dashboard dashboardPage;
 
 	@Parameters("browserName")
-	@BeforeMethod
+	@BeforeMethod(groups= {"smoke"})
 	public void setup(String browserName) throws IOException {
 		
 		driver = getDriver(browserName);
+		System.out.println("driver instance value"+ driver);
 		loginPage = new Login_Page_Objects(driver);
 		leaveListPage = new LeaveListPage(driver);
 
@@ -51,7 +53,7 @@ public class Base_Class extends DriverFactory
 		applyLeavePage.clickApplyLeave();
 	}
 
-	// @AfterMethod()
+	// @AfterMethod(groups= {"smoke"})
 	// public void tearDown() { driver.quit(); }
 
 }

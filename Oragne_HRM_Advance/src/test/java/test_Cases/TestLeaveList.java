@@ -13,7 +13,9 @@ import pageObjects.Leave.LeaveListPage;
 
 public class TestLeaveList extends Base_Class {
 
-	@Test(priority = 0, enabled = false, description = "verify that leave list page loads successfully with no records")
+	static String comment = "please approve my leave";
+
+	@Test(priority = 0, enabled = true, description = "verify that leave list page loads successfully with no records")
 	public void verifyLeaveListPageShowsNoRecords() throws InterruptedException {
 		// **Arrange**: setup done in @beforeMethod
 		dashboardPage.clickOnLeaveTab();
@@ -28,7 +30,7 @@ public class TestLeaveList extends Base_Class {
 
 	}
 
-	@Test(priority = 1, enabled = false, description = "verify that leave list page loads successfully with records")
+	@Test(priority = 1, enabled = true, description = "verify that leave list page loads successfully with records")
 	public void verifyLeaveListPageShowsRecords() throws InterruptedException {
 
 		// **Arrange**: Set up by applying a leave
@@ -39,9 +41,8 @@ public class TestLeaveList extends Base_Class {
 
 		// apply leave
 		applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
-				ConfigReader.getConfigPropertyData("monthName"),
-				ConfigReader.getConfigPropertyData("endDateCancelled"));
-		leaveListPage.clickSearchButton();
+				ConfigReader.getConfigPropertyData("endDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"));
 
 		// **Act**: Navigate back to Leave List and fetch records
 		dashboardPage.clickOnLeaveTab();
@@ -51,7 +52,7 @@ public class TestLeaveList extends Base_Class {
 
 	}
 
-	@Test(priority = 2, enabled = false, description = "verify date range filter with no records")
+	@Test(priority = 2, enabled = true, description = "verify date range filter with no records")
 	public void verifyFilteringLeaveWithNoRecords() {
 		// **Arrange**: setup done in @beforeMethod
 		dashboardPage.clickOnLeaveTab();
@@ -67,7 +68,7 @@ public class TestLeaveList extends Base_Class {
 				"Expected 'No Records Found' message not displayed for empty date range.");
 	}
 
-	@Test(priority = 3, enabled = false, description = "verify date range filter with records")
+	@Test(priority = 3, enabled = true, description = "verify date range filter with records")
 	public void verifyFilteringLeaveWithRecords() throws InterruptedException {
 
 		// **Arrange**: Set up by applying a leave
@@ -78,14 +79,16 @@ public class TestLeaveList extends Base_Class {
 
 		// apply leave
 		applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
-				ConfigReader.getConfigPropertyData("monthName"),
-				ConfigReader.getConfigPropertyData("endDateCancelled"));
+				ConfigReader.getConfigPropertyData("endDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"));
+
 		dashboardPage.clickOnLeaveTab();
 		Assert.assertTrue(leaveListPage.leaveListPageWithRecords(), "No one has applied the leave ");
 
 		// **Act**: Apply the date range filter
-		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDate"),
-				ConfigReader.getConfigPropertyData("endDate"), ConfigReader.getConfigPropertyData("monthName"));
+		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDateCancelled"),
+				ConfigReader.getConfigPropertyData("endDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"));
 		leaveListPage.clickSearchButton();
 
 		// **Assert**: Verify that leave records are present
@@ -97,9 +100,11 @@ public class TestLeaveList extends Base_Class {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
 		leaveListPage.clickOnApplyTab();
+		// apply leave
 		applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
-				ConfigReader.getConfigPropertyData("monthName"),
-				ConfigReader.getConfigPropertyData("endDateCancelled"));
+				ConfigReader.getConfigPropertyData("endDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"));
+		leaveListPage.clickSearchButton();
 		dashboardPage.clickOnLeaveTab();
 		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDate"),
 				ConfigReader.getConfigPropertyData("endDate"), ConfigReader.getConfigPropertyData("monthName"));
@@ -115,7 +120,7 @@ public class TestLeaveList extends Base_Class {
 
 	}
 
-	@Test(priority = 5, enabled = false, description = "Verify filtering leaves with Pending status (default) and no records")
+	@Test(priority = 5, enabled = true, description = "Verify filtering leaves with Pending status (default) and no records")
 	public void verifyFilteringLeavesWithPendingStatusAndNoRecords() {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
@@ -143,7 +148,7 @@ public class TestLeaveList extends Base_Class {
 				"Status did not reset correctly!");
 	}
 
-	@Test(priority = 6, enabled = false, description = "Verify filtering leaves with Pending status (default) and with records")
+	@Test(priority = 6, enabled = true, description = "Verify filtering leaves with Pending status (default) and with records")
 	public void verifyFilteringLeavesWithPendingStatusAndWithRecords() throws InterruptedException {
 
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
@@ -155,9 +160,8 @@ public class TestLeaveList extends Base_Class {
 
 		// apply leave
 		applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
-				ConfigReader.getConfigPropertyData("monthName"),
-				ConfigReader.getConfigPropertyData("endDateCancelled"));
-		leaveListPage.clickSearchButton();
+				ConfigReader.getConfigPropertyData("endDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"));
 		dashboardPage.clickOnLeaveTab();
 		Assert.assertTrue(leaveListPage.leaveListPageWithRecords(), "No one has applied the leave ");
 
@@ -180,7 +184,7 @@ public class TestLeaveList extends Base_Class {
 
 	// Rest filter is pending
 
-	@Test(priority = 7, enabled = false, description = "Verify filtering leaves with cancelled status and with records")
+	@Test(priority = 7, enabled = true, description = "Verify filtering leaves with cancelled status and with records")
 	public void verifyFilteringLeavesWithCancelledStatusAndWithRecords() throws InterruptedException {
 
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
@@ -207,7 +211,7 @@ public class TestLeaveList extends Base_Class {
 		}
 	}
 
-	@Test(priority = 8, enabled = false, description = "Verify filtering leaves with leave type")
+	@Test(priority = 8, enabled = true, description = "Verify filtering leaves with leave type")
 	public void verifyFilteringLeavesWithLeaveType() {
 
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
@@ -221,40 +225,200 @@ public class TestLeaveList extends Base_Class {
 		leaveListPage.selectLeaveType("CAN - FMLA");
 		leaveListPage.clickSearchButton();
 
-		// **Assert**: all the leaves are coming with the selected leave type after applying the filter
+		// **Assert**: all the leaves are coming with the selected leave type after
+		// applying the filter
 		if (leaveListPage.getLeaveRecords().isEmpty()) {
 			Assert.fail("No records found with the selected filter criteria.");
 		} else {
-		Assert.assertTrue(leaveListPage.verifyAllRecordsWithLeaveType("CAN - FMLA"),
-				"Not all records have the expected leave type: CAN - FMLA.");
+			Assert.assertTrue(leaveListPage.verifyAllRecordsWithLeaveType("CAN - FMLA"),
+					"Not all records have the expected leave type: CAN - FMLA.");
 		}
 
 	}
-	
-	
+
 	@Test(priority = 9, enabled = true, description = "Verify filtering leaves with employe Name")
 	public void verifyFilteringLeavesWithEmployeName() {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
-				dashboardPage.clickOnLeaveTab();
-				Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
 
-				// **Act**: choose leave type
-				leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDateCancelled"),
-						ConfigReader.getConfigPropertyData("endDateCancelled"),
-						ConfigReader.getConfigPropertyData("monthName"));
-				leaveListPage.searchWithEmployeeName("John");
-				leaveListPage.clickSearchButton();
+		// **Act**: choose leave type
+		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDateCancelled"),
+				ConfigReader.getConfigPropertyData("endDateCancelled"),
+				ConfigReader.getConfigPropertyData("monthName"));
+		leaveListPage.searchWithEmployeeName("John");
+		leaveListPage.clickSearchButton();
 
-				// **Assert**: all the leaves are coming with the selected leave type after applying the filter
-				if (leaveListPage.getLeaveRecords().isEmpty()) {
-					Assert.fail("No records found with the selected filter criteria.");
-				} else {
-				Assert.assertTrue(leaveListPage.verifyAllRecordsWithEmployName("David Johnson"),
-						"Not all records have the expected leave type: David Johnson.");
-				}
-	
-	
-	
+		// **Assert**: all the leaves are coming with the selected leave type after
+		// applying the filter
+		if (leaveListPage.getLeaveRecords().isEmpty()) {
+			Assert.fail("No records found with the selected filter criteria.");
+		} else {
+			Assert.assertTrue(leaveListPage.verifyAllRecordsWithEmployName("David Johnson"),
+					"Not all records have the expected leave type: David Johnson.");
+		}
+
 	}
-	
+
+	@Test(priority = 10, enabled = true, description = "Verify add comment")
+	public void verifyAddComment() throws InterruptedException {
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		// apply leave
+		if (leaveListPage.getLeaveRecords().size() == 0) {
+			leaveListPage.clickOnApplyTab();
+			Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
+
+			// **Act**: add Comment
+			applyLeave(ConfigReader.getConfigPropertyData("startDateComment"),
+					ConfigReader.getConfigPropertyData("endDateComment"),
+					ConfigReader.getConfigPropertyData("monthNameComment"));
+			dashboardPage.clickOnLeaveTab();
+		}
+
+		// **Act**: add Comment
+		leaveListPage.clickMoreOptionBtn();
+		leaveListPage.clickAddCommentBtn();
+		leaveListPage.addCommnet(comment);
+		leaveListPage.submitComment();
+
+		// **Assert**: verify that comment id added sucessfully
+		Assert.assertEquals(leaveListPage.getSucessMessage(), "Successfully Saved", "sucessfull message did not come");
+	}
+
+	@Test(groups = { "smoke" }, priority = 11, enabled = false, description = "Verify leave request details page")
+	public void verifyleaveRequestDetails() throws InterruptedException {
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		// apply leave
+		if (leaveListPage.getLeaveRecords().size() == 0) {
+			leaveListPage.clickOnApplyTab();
+			Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
+
+			// **Act**: add Comment
+			applyLeave(ConfigReader.getConfigPropertyData("startDateComment"),
+					ConfigReader.getConfigPropertyData("endDateComment"),
+					ConfigReader.getConfigPropertyData("monthNameComment"));
+			dashboardPage.clickOnLeaveTab();
+		}
+
+		// **Act**: add Comment
+		leaveListPage.clickMoreOptionBtn();
+		leaveListPage.clickViewDetailsOption();
+
+		// **Assert**: verify that leave request loads successfully & EMploye,leavedate,
+		// levae tyep are present
+		Assert.assertEquals(leaveListPage.verifyLeaveRequestDetailsLoads(), "Leave Request Details",
+				"Leave request details did not load");
+		System.out.println(leaveListPage.getEmployeName());
+		System.out.println(leaveListPage.getLeaveDate());
+		System.out.println(leaveListPage.getLeaveType());
+	}
+
+	@Test(groups = {
+			"smoke" }, priority = 12, enabled = false, description = "Verify  add comment functionality on leave request details page")
+	public void verifyAddCommentOnleaveRequestDetails() throws InterruptedException {
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		// **Act**: add Comment
+		if (leaveListPage.getLeaveRecords().size() != 0) {
+			leaveListPage.clickMoreOptionBtn();
+			leaveListPage.clickViewDetailsOption();
+			Assert.assertEquals(leaveListPage.verifyLeaveRequestDetailsLoads(), "Leave Request Details",
+					"Leave request details did not load");
+
+		} else {
+			Assert.assertTrue(leaveListPage.getLeaveRecords().isEmpty(), "no record found");
+		}
+
+		leaveListPage.clickMoreOptionBtn();
+		leaveListPage.clickAddCommentBtn();
+		;
+		leaveListPage.addCommnet(comment);
+		leaveListPage.submitComment();
+
+		// **Assert**: verify that comment id added sucessfully
+		Assert.assertEquals(leaveListPage.getComment(), comment, "comment is not added");
+		Assert.assertEquals(leaveListPage.getSucessMessage(), "Successfully Saved", "sucessfull message did not come");
+	}
+
+	@Test(groups = { "smoke" }, priority = 13, enabled = false, description = "Verify leave request details page")
+	public void verifyCommentsOnleaveRequestDetails() throws InterruptedException {
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		// **Act**: add Comment
+		if (leaveListPage.getLeaveRecords().size() != 0) {
+			leaveListPage.clickMoreOptionBtn();
+			leaveListPage.clickViewDetailsOption();
+			Assert.assertEquals(leaveListPage.verifyLeaveRequestDetailsLoads(), "Leave Request Details",
+					"Leave request details did not load");
+
+		} else {
+			Assert.assertTrue(leaveListPage.getLeaveRecords().isEmpty(), "no record found");
+		}
+
+		leaveListPage.getCommentsBtn();
+		leaveListPage.addCommnet(comment);
+		leaveListPage.submitComment();
+
+		// **Assert**: verify that comment id added sucessfully
+		Assert.assertEquals(leaveListPage.getComment(), comment, "comment is not added");
+		Assert.assertEquals(leaveListPage.getSucessMessage(), "Successfully Saved", "sucessfull message did not come");
+
+	}
+
+	@Test(groups = { "smoke" }, priority = 14, enabled = false, description = "Verify leave request details page")
+	public void verifyCancelLeaveOnleaveRequestDetails() throws InterruptedException {
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		
+		// **Act**: cancel Leave on Leave request details pge
+		if (leaveListPage.getLeaveRecords().size() != 0) {
+			leaveListPage.clickMoreOptionBtn();
+			leaveListPage.clickViewDetailsOption();
+			Assert.assertEquals(leaveListPage.verifyLeaveRequestDetailsLoads(), "Leave Request Details",
+					"Leave request details did not load");
+		} else {
+			Assert.assertTrue(leaveListPage.getLeaveRecords().isEmpty(), "no record found");
+		}
+		leaveListPage.clickMoreOptionBtn();
+		leaveListPage.cancelLeave();
+		
+		// **Assert**: verify that leave is cancelled successfully
+		Assert.assertEquals(leaveListPage.getLeaveStatusOnRequestDetails(), "Cancelled");
+
+	}
+
+	@Test(groups = { "smoke" }, priority = 14, enabled = true, description = "Verify leave request details page")
+	public void verifyBackClickOnleaveRequestDetails() throws InterruptedException {
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		// **Act**: add Comment
+		if (leaveListPage.getLeaveRecords().size() != 0) {
+			leaveListPage.clickMoreOptionBtn();
+			leaveListPage.clickViewDetailsOption();
+			Assert.assertEquals(leaveListPage.verifyLeaveRequestDetailsLoads(), "Leave Request Details",
+					"Leave request details did not load");
+
+		} else {
+			Assert.assertTrue(leaveListPage.getLeaveRecords().isEmpty(), "no record found");
+		}
+
+		leaveListPage.getBackBtn();
+
+		// **Assert**: verify that user back to Leave List page
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+	}
 }

@@ -22,7 +22,9 @@ public class TestApplyLeave extends Base_Class {
 				ConfigReader.getConfigPropertyData("endDateCancelled"));
 
 	    // **Assert**: Verify that leave application was successful
+	
 		Assert.assertTrue(leaveListPage.leaveListPageWithRecords(),"Leave records were not found after applying leave!");
+	
 	}
 
 }

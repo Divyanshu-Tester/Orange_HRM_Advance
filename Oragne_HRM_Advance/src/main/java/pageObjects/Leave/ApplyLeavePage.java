@@ -84,12 +84,12 @@ public class ApplyLeavePage extends BrowserUtilities{
 	
 	
     public void selectFromDate(String day,String month) {
-    	BrowserUtilities.selectDateFromCalendar(month,driver,clickOnStartDateField, listOfAllDays, day,getSelectedMonth,chooseNextMonth);
+    	selectDateFromCalendar(month,driver,clickOnStartDateField, listOfAllDays, day,getSelectedMonth,chooseNextMonth);
       
     }
 
     public void selectToDate(String day,String month)  {
-    	BrowserUtilities.selectDateFromCalendar(month,driver,clickOnEndDateField, listOfAllDays, day,getSelectedMonth,chooseNextMonth);
+    	selectDateFromCalendar(month,driver,clickOnEndDateField, listOfAllDays, day,getSelectedMonth,chooseNextMonth);
       
     }
     
