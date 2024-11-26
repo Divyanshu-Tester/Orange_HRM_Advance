@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [CrossFunctionalTesting]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="chrome(failed)">
+  <test thread-count="5" name="smokeTest(failed)">
     <parameter name="browserName" value="chrome"/>
+    <groups>
+      <run>
+        <include name="smoke"/>
+      </run>
+    </groups>
     <classes>
       <class name="test_Cases.TestLeaveList">
         <methods>
           <include name="setup"/>
-          <include name="verifyResetDateFilter"/>
+          <include name="verifyBackClickOnleaveRequestDetails"/>
         </methods>
       </class> <!-- test_Cases.TestLeaveList -->
     </classes>
-  </test> <!-- chrome(failed) -->
+  </test> <!-- smokeTest(failed) -->
 </suite> <!-- Failed suite [CrossFunctionalTesting] -->

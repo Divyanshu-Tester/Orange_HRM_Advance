@@ -33,7 +33,7 @@ public class Page_Object_Dashboard extends BrowserUtilities{
 		}
 		
 		public void clickOnLeaveTab() {
-			staticWait(1);
+			staticWait(2);
 			leaveBtn.click();
 		}
 

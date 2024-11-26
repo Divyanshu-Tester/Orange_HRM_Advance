@@ -23,11 +23,21 @@ public class BrowserUtilities {
 	public void waitElementToVisible(WebDriver driver, int time, WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
 		wait.until(ExpectedConditions.visibilityOf(element));
-
+	}
+	
+	public void waitForInvisibility(WebDriver driver,int time, WebElement element) {
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+	wait.until(ExpectedConditions.invisibilityOfAllElements(element));
+	}
+	
+	public void waitElementToBeClickable(WebDriver driver, int time, WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+	wait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 	
 	//reusable selelctdate function
-	public static void selectDateFromCalendar(String month,WebDriver driver,WebElement calendarField, List<WebElement> listOfDays, String day,WebElement selectedMonth,WebElement chooseMonth) {
+	public  void selectDateFromCalendar(String month,WebDriver driver,WebElement calendarField, List<WebElement> listOfDays, String day,WebElement selectedMonth,WebElement chooseMonth) {
+		waitElementToVisible(driver,1,calendarField);
 		calendarField.click();
 		
 		waitForElementsVisible(driver,2,listOfDays);
@@ -50,9 +60,12 @@ public class BrowserUtilities {
     	}}
 	}
 
-	public static void  waitForElementsVisible(WebDriver driver, int timeout, List<WebElement> locator) {
+	public  void  waitForElementsVisible(WebDriver driver, int timeout, List<WebElement> locator) {
+		
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
 		 wait.until(ExpectedConditions.visibilityOfAllElements(locator));
+		 
+	
 	}
 
 	public void scrollPage(int x, int y, WebDriver driver) {
