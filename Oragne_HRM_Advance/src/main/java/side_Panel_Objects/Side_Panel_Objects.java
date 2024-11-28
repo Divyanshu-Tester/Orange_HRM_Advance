@@ -22,7 +22,7 @@ public class Side_Panel_Objects extends Base_Objects
 
 	private By Click_Leave = By.xpath("//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name'][normalize-space()='Leave']");
 	private By Click_Buzz = By.xpath("//span[contains(@class, 'oxd-main-menu-item--name') and normalize-space()='Buzz']\n");
-	
+	private By ClickDashboard = By.xpath("//span[@class='oxd-text oxd-text--span oxd-main-menu-item--name'][normalize-space()='Dashboard']");
 	public void clkLeave()
 	{
 		WebElement clickLeave = wait.until(ExpectedConditions.elementToBeClickable(Click_Leave));
@@ -34,4 +34,14 @@ public class Side_Panel_Objects extends Base_Objects
 		WebElement Click_Buz = wait.until(ExpectedConditions.elementToBeClickable(Click_Buzz));
 		Click_Buz.click();
 	}
+	
+	public void clkDashboard()
+	{
+		WebElement clickDashboard = wait.until(ExpectedConditions.elementToBeClickable(ClickDashboard));
+		clickDashboard.click();
+	}
+	
+	
 }
+
+

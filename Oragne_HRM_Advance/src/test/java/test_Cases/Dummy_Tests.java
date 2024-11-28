@@ -26,7 +26,7 @@ public class Dummy_Tests extends Base_Class
 
 
 	  Dummy.Default_Username("Admin");
-	  Dummy.Default_Passowrd("admin123");
+	  Dummy.dfltPassword("admin123");
 	  Dummy.Click_Login();
 	 // Dummy_Leave.Click_Leave_Button();
 	  Thread.sleep(15000);

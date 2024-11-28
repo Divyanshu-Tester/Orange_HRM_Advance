@@ -19,7 +19,7 @@ public class TC_Login_001 extends Base_Class //IMPORTING BASE CLASS TO LAUNCH TH
 	  //CALLING RE-USABLE METHODS FROM LOGIN_PAGE 
 	  
 	  Login_Page.Default_Username("Admin");
-	  Login_Page.Default_Passowrd("admin123");
+	  Login_Page.dfltPassword("admin123");
 	  Login_Page.Click_Login();
 	  
 	  

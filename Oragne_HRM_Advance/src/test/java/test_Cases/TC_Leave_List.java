@@ -16,7 +16,7 @@ public class TC_Leave_List extends Base_Class
   {
 	  Login_Page_Objects Login = new Login_Page_Objects(driver);
 	  Login.Default_Username("admin");
-	  Login.Default_Passowrd("admin123");
+	  Login.dfltPassword("admin123");
 	  Login.Click_Login();
 	  Thread.sleep(5000);
 	  Side_Panel_Objects Leave = new Side_Panel_Objects(driver);

@@ -37,6 +37,7 @@ public class Login_Page_Objects
 	{
 		@SuppressWarnings("unused")
 		WebElement Wait_Username= ((FluentWait<WebDriver>) wait).until(ExpectedConditions.visibilityOfElementLocated(Default_User_Name_Field));
+		Wait_Username.click();
 		driver.findElement(Default_User_Name_Field).clear();
 		driver.findElement(Default_User_Name_Field).sendKeys(username);
 
@@ -46,10 +47,12 @@ public class Login_Page_Objects
 
 	// RE-USABLE METHOD FOR PASSOWRD
 
-	public void Default_Passowrd(String password)
+	public void dfltPassword(String password)
 	{
-		driver.findElement(Default_Password).clear();
-		driver.findElement(Default_Password).sendKeys(password);
+		WebElement entrPassword = wait.until(ExpectedConditions.elementToBeClickable(Default_Password));
+		entrPassword.click();
+		entrPassword.clear();
+		entrPassword.sendKeys("admin123");
 
 	}
 
@@ -67,4 +70,11 @@ public class Login_Page_Objects
 		driver.findElement(Forget_Password).click();
 	}
 
+	public void directLogin(String username , String password)
+	{
+		Default_Username(username);
+		dfltPassword(password);
+		Click_Login();
+		
+	}
 }
