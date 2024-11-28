@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>TestNG:  chrome</title>
+<link href="../testng.css" rel="stylesheet" type="text/css" />
+<link href="../my-testng.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+.log { display: none;} 
+.stack-trace { display: none;} 
+</style>
+<script type="text/javascript">
+<!--
+function flip(e) {
+  current = e.style.display;
+  if (current == 'block') {
+    e.style.display = 'none';
+    return 0;
+  }
+  else {
+    e.style.display = 'block';
+    return 1;
+  }
+}
+
+function toggleBox(szDivId, elem, msg1, msg2)
+{
+  var res = -1;  if (document.getElementById) {
+    res = flip(document.getElementById(szDivId));
+  }
+  else if (document.all) {
+    // this is the way old msie versions work
+    res = flip(document.all[szDivId]);
+  }
+  if(elem) {
+    if(res == 0) elem.innerHTML = msg1; else elem.innerHTML = msg2;
+  }
+
+}
+
+function toggleAllBoxes() {
+  if (document.getElementsByTagName) {
+    d = document.getElementsByTagName('div');
+    for (i = 0; i < d.length; i++) {
+      if (d[i].className == 'log') {
+        flip(d[i]);
+      }
+    }
+  }
+}
+
+// -->
+</script>
+
+</head>
+<body>
+<h2 align='center'>chrome</h2><table border='1' align="center">
+<tr>
+<td>Tests passed/Failed/Skipped:</td><td>8/1/0</td>
+</tr><tr>
+<td>Started on:</td><td>Sat Nov 23 15:38:40 IST 2024</td>
+</tr>
+<tr><td>Total time:</td><td>254 seconds (254076 ms)</td>
+</tr><tr>
+<td>Included groups:</td><td></td>
+</tr><tr>
+<td>Excluded groups:</td><td></td>
+</tr>
+</table><p/>
+<small><i>(Hover the method name to see the test class name)</i></small><p/>
+<table width='100%' border='1' class='invocation-failed'>
+<tr><td colspan='4' align='center'><b>FAILED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeavesWithEmployeName()'><b>verifyFilteringLeavesWithEmployeName</b><br>Test class: test_Cases.TestLeaveList<br>Test method: Verify filtering leaves with employe Name</td>
+<td><div><pre>java.util.NoSuchElementException: No element found with name: John
+	at pageObjects.Leave.LeaveListPage.lambda$3(LeaveListPage.java:286)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at pageObjects.Leave.LeaveListPage.searchWithEmployeeName(LeaveListPage.java:286)
+	at test_Cases.TestLeaveList.verifyFilteringLeavesWithEmployeName(TestLeaveList.java:246)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+... Removed 15 stack frames</pre></div><a href='#' onClick='toggleBox("stack-trace1044081002", this, "Click to show all stack frames", "Click to hide stack frames")'>Click to show all stack frames</a>
+<div class='stack-trace' id='stack-trace1044081002'><pre>java.util.NoSuchElementException: No element found with name: John
+	at pageObjects.Leave.LeaveListPage.lambda$3(LeaveListPage.java:286)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:403)
+	at pageObjects.Leave.LeaveListPage.searchWithEmployeeName(LeaveListPage.java:286)
+	at test_Cases.TestLeaveList.verifyFilteringLeavesWithEmployeName(TestLeaveList.java:246)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1597)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner$SuiteWorker.run(SuiteRunner.java:463)
+	at org.testng.internal.thread.ThreadUtil.lambda$execute$0(ThreadUtil.java:64)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+</pre></div></td>
+<td>10</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+</table><p>
+<table width='100%' border='1' class='invocation-passed'>
+<tr><td colspan='4' align='center'><b>PASSED TESTS</b></td></tr>
+<tr><td><b>Test method</b></td>
+<td><b>Attribute(s)</b></td>
+<td width="30%"><b>Exception</b></td>
+<td width="10%"><b>Time (seconds)</b></td>
+<td><b>Instance</b></td>
+</tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeavesWithLeaveType()'><b>verifyFilteringLeavesWithLeaveType</b><br>Test class: test_Cases.TestLeaveList<br>Test method: Verify filtering leaves with leave type</td>
+<td></td>
+<td>8</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyLeaveListPageShowsNoRecords()'><b>verifyLeaveListPageShowsNoRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: verify that leave list page loads successfully with no records</td>
+<td></td>
+<td>7</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeaveWithNoRecords()'><b>verifyFilteringLeaveWithNoRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: verify date range filter with no records</td>
+<td></td>
+<td>7</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeavesWithPendingStatusAndWithRecords()'><b>verifyFilteringLeavesWithPendingStatusAndWithRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: Verify filtering leaves with Pending status (default) and with records</td>
+<td></td>
+<td>22</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeaveWithRecords()'><b>verifyFilteringLeaveWithRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: verify date range filter with records</td>
+<td></td>
+<td>21</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyLeaveListPageShowsRecords()'><b>verifyLeaveListPageShowsRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: verify that leave list page loads successfully with records</td>
+<td></td>
+<td>15</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeavesWithCancelledStatusAndWithRecords()'><b>verifyFilteringLeavesWithCancelledStatusAndWithRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: Verify filtering leaves with cancelled status and with records</td>
+<td></td>
+<td>8</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+<tr>
+<td title='test_Cases.TestLeaveList.verifyFilteringLeavesWithPendingStatusAndNoRecords()'><b>verifyFilteringLeavesWithPendingStatusAndNoRecords</b><br>Test class: test_Cases.TestLeaveList<br>Test method: Verify filtering leaves with Pending status (default) and no records</td>
+<td></td>
+<td>7</td>
+<td>test_Cases.TestLeaveList@649bec2e</td></tr>
+</table><p>
+</body>
+</html>

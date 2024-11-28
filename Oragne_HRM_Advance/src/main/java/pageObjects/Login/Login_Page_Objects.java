@@ -7,12 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import Utilities.ConfigReader;
+import pageObjects.Dashboard.Page_Object_Dashboard;
 
 public class Login_Page_Objects
 
 {
 
-	private WebDriver driver;
+	public WebDriver driver;
 	public WebDriverWait wait;
 
 	//CREATING CONSTRUCTOR TO INITIALIZE THE WEBDRIVER
@@ -30,7 +32,15 @@ public class Login_Page_Objects
 	private By Default_Password = By.xpath("//input[@placeholder='Password']");                                               // PASSWORD
 	private By Login_Button = By.xpath("//button[@type='submit']");
 	private By Forget_Password = By.xpath("//p[@class='oxd-text oxd-text--p orangehrm-login-forgot-header']");        //FORGET PASSOWORD
+<<<<<<< HEAD
 
+=======
+	
+	
+	public void loadLoginPage() {
+		driver.get(ConfigReader.getConfigPropertyData("url"));
+	}
+>>>>>>> refs/remotes/origin/master
 	//RE-USABLE METHOD FOR USERNAME
 
 	public void Default_Username(String username)
@@ -57,10 +67,17 @@ public class Login_Page_Objects
 	}
 
 	//RE-USABLE METHOD TO CLICK ON LOGIN BUTTON
+<<<<<<< HEAD
 
 	public void Click_Login()
+=======
+	
+	public Page_Object_Dashboard Click_Login()
+>>>>>>> refs/remotes/origin/master
 	{
 		driver.findElement(Login_Button).click();
+		Page_Object_Dashboard dashboardPage= new Page_Object_Dashboard(driver);
+		return dashboardPage;
 	}
 
 	//RE-USABLE METHOD TO CLICK ON THE FORGET PASSOWRD LINK

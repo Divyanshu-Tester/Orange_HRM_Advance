@@ -9,20 +9,12 @@
       </run>
     </groups>
     <classes>
-<<<<<<< HEAD
-      <class name="test_Cases.Graph_test">
-=======
       <class name="test_Cases.TestLeaveList">
->>>>>>> refs/remotes/origin/master
         <methods>
           <include name="setup"/>
           <include name="verifyBackClickOnleaveRequestDetails"/>
         </methods>
-<<<<<<< HEAD
-      </class> <!-- test_Cases.Graph_test -->
-=======
       </class> <!-- test_Cases.TestLeaveList -->
->>>>>>> refs/remotes/origin/master
     </classes>
   </test> <!-- smokeTest(failed) -->
 </suite> <!-- Failed suite [CrossFunctionalTesting] -->
