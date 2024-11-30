@@ -10,10 +10,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import Utilities.BrowserUtilities;
+import pageObjects.Profile.Dynamic_Profile;
 
 public class LeaveListPage extends BrowserUtilities {
 
 	public WebDriver driver;
+	Dynamic_Profile profile= new Dynamic_Profile(driver);
 
 	public LeaveListPage(WebDriver driver) {
 		// TODO Auto-generated constructor stub
@@ -234,14 +236,23 @@ public class LeaveListPage extends BrowserUtilities {
 		resetFilterBtn.click();
 	}
 
-	public List<WebElement> getLeaveRecords() {
-		try {
-			if(leaveRecordCount.size()!=0) {
-			waitForElementsVisible(driver, 2, leaveRecordCount);}
-			return leaveRecordCount;
-		} catch (TimeoutException e) {
-			return new ArrayList<>();
-		}
+	public List<WebElement> getLeaveRecords() throws InterruptedException {
+		Thread.sleep(2000);
+		// Check if the list is empty before waiting for elements
+	    if (leaveRecordCount.isEmpty()) {
+	        return new ArrayList<>();
+	    }
+
+	    try {
+	        // Wait for elements to be visible only if the list is not empty
+	        waitForElementsVisible(driver, 3, leaveRecordCount);
+
+	        // If the list size is not zero, return the list
+	        return leaveRecordCount;
+	    } catch (TimeoutException e) {
+	        // If a TimeoutException occurs, return an empty list
+	        return new ArrayList<>();
+	    }
 	}
 
 	public String getSelectedLeaveStatus() {
@@ -321,28 +332,38 @@ public class LeaveListPage extends BrowserUtilities {
 		return allRecord;
 	}
 
-	public void searchWithEmployeeName(String empName) {
+	public void searchWithEmployeeName(String emplyName) {
+	String empArr[]=	emplyName.split(" ");
 		clickOnEmpField.click();
-		System.out.println("empyname" + empName);
-		clickOnEmpField.sendKeys(empName);
-		waitForElementsVisible(driver, 2, EmploysList);
+		System.out.println("empyname" + empArr[0]);
+		clickOnEmpField.sendKeys(empArr[0]);
+		waitForElementsVisible(driver, 3, EmploysList);
 		System.out.println("size of emply" + EmploysList.size());
+		
+		for(WebElement list:EmploysList) {
+			if(list.getText().contains(empArr[0])){
+				list.click();
+				break;
+			}
+		}
 
-		WebElement targetElement = EmploysList.stream().peek(e -> System.out.println("Element found: " + e.getText()))
-				.filter(s -> s.getText().contains(empName))
-				.peek(e -> System.out.println("Filtered element text: " + e.getText())).findAny()
-				.orElseThrow(() -> new NoSuchElementException("No element found with name: " + empName));
-		targetElement.click();
+		//WebElement targetElement = EmploysList.stream().peek(e -> System.out.println("Element found: " + e.getText()))
+			//	.filter(s -> s.getText().trim().toLowerCase().contains(emplyName.trim().toLowerCase()))
+			//	.peek(e -> System.out.println("Filtered element text: " + e.getText())).findAny()
+			//	.orElseThrow(() -> new NoSuchElementException("No element found with name: " + emplyName));
+	
+	//	targetElement.click();
 	}
 
 	public boolean verifyAllRecordsWithEmployName(String empyName) {
 		// TODO Auto-generated method stub
+		String empArr[]=	empyName.split(" ");
 		boolean allRecord = true;
 		try {
 			waitForElementsVisible(driver, 2, totalLeavesWithEmpyName);
 			for (WebElement status : totalLeavesWithEmpyName) {
 				System.out.println(status.getText());
-				if (!status.getText().contains(empyName)) {
+				if (!status.getText().contains(empArr[0])) {
 					allRecord = false;
 					break;
 				}

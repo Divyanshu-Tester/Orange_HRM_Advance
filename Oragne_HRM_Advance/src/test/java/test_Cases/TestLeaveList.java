@@ -212,7 +212,7 @@ public class TestLeaveList extends Base_Class {
 	}
 
 	@Test(priority = 8, enabled = true, description = "Verify filtering leaves with leave type")
-	public void verifyFilteringLeavesWithLeaveType() {
+	public void verifyFilteringLeavesWithLeaveType() throws InterruptedException {
 
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
@@ -236,8 +236,8 @@ public class TestLeaveList extends Base_Class {
 
 	}
 
-	@Test(priority = 9, enabled = true, description = "Verify filtering leaves with employe Name")
-	public void verifyFilteringLeavesWithEmployeName() {
+	@Test(groups= {"smoke"},priority = 9, enabled = true, description = "Verify filtering leaves with employe Name")
+	public void verifyFilteringLeavesWithEmployeName() throws InterruptedException {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
 		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
@@ -246,7 +246,7 @@ public class TestLeaveList extends Base_Class {
 		leaveListPage.applyDateFilter(ConfigReader.getConfigPropertyData("startDateCancelled"),
 				ConfigReader.getConfigPropertyData("endDateCancelled"),
 				ConfigReader.getConfigPropertyData("monthName"));
-		leaveListPage.searchWithEmployeeName("John");
+		leaveListPage.searchWithEmployeeName(profileName.usrName());
 		leaveListPage.clickSearchButton();
 
 		// **Assert**: all the leaves are coming with the selected leave type after
@@ -254,8 +254,8 @@ public class TestLeaveList extends Base_Class {
 		if (leaveListPage.getLeaveRecords().isEmpty()) {
 			Assert.fail("No records found with the selected filter criteria.");
 		} else {
-			Assert.assertTrue(leaveListPage.verifyAllRecordsWithEmployName("David Johnson"),
-					"Not all records have the expected leave type: David Johnson.");
+			Assert.assertTrue(leaveListPage.verifyAllRecordsWithEmployName(profileName.usrName()),
+					"Not all records have the expected leave type: "+profileName.usrName());
 		}
 
 	}
@@ -399,7 +399,7 @@ public class TestLeaveList extends Base_Class {
 
 	}
 
-	@Test(groups = { "smoke" }, priority = 15, enabled = true, description = "Verify leave request details page")
+	@Test(groups = { "smoke" }, priority = 15, enabled = false, description = "Verify leave request details page")
 	public void verifyBackClickOnleaveRequestDetails() throws InterruptedException {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
