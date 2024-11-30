@@ -16,7 +16,7 @@ public class Profile_Name extends Base_Class
   {
 	  Login_Page_Objects Login = new Login_Page_Objects(driver);
 	  Login.Default_Username("admin");
-	  Login.dfltPassword("admin123");
+	  Login.Default_Password("admin123");
 	  Login.Click_Login();
 	  Dynamic_Profile Name = new  Dynamic_Profile(driver);
 	 

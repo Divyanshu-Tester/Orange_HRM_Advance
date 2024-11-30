@@ -399,7 +399,7 @@ public class TestLeaveList extends Base_Class {
 
 	}
 
-	@Test(groups = { "smoke" }, priority = 14, enabled = true, description = "Verify leave request details page")
+	@Test(groups = { "smoke" }, priority = 15, enabled = true, description = "Verify leave request details page")
 	public void verifyBackClickOnleaveRequestDetails() throws InterruptedException {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
