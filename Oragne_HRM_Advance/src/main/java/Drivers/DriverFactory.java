@@ -16,6 +16,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 
 import Utilities.ConfigReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.opentelemetry.sdk.metrics.internal.data.ImmutableGaugeData;
 
 public class DriverFactory {
 
@@ -47,8 +48,15 @@ public class DriverFactory {
 			WebDriverManager.chromedriver();
 			driver = new ChromeDriver(options);
 			driver.manage().window().maximize();
+			Map<String, Object> networkConditions = new HashMap<>();
+            networkConditions.put("offline", false);  // Not offline
+            networkConditions.put("latency", 100);  // 100 ms latency
+            networkConditions.put("downloadThroughput", 50000);  // 50 KB/s download
+            networkConditions.put("uploadThroughput", 30000);    // 30 KB/s upload
 
-		}
+            // Apply the network conditions
+            ChromeDriver chromeDriver = (ChromeDriver) driver;
+            chromeDriver.executeCdpCommand("Network.emulateNetworkConditions", networkConditions);			}
 
 		else if (browserName.equals("firefox")) {
 			FirefoxOptions options = new FirefoxOptions();

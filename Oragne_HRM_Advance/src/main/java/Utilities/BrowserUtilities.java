@@ -72,4 +72,10 @@ public class BrowserUtilities {
 		JavascriptExecutor exe = (JavascriptExecutor) driver;
 		exe.executeScript("window.scrollBy(arguments[0], arguments[1]);", x, y);
 	}
+	
+	public void waitForPageToLoad(WebDriver driver, int timeoutInSeconds) {
+	    new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds)).until(
+	        webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete")
+	    );
+	}
 }

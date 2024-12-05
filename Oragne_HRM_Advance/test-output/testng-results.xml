@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="15" total="16" passed="1" failed="0" skipped="0">
+<testng-results ignored="14" total="17" passed="3" failed="0" skipped="0">
   <reporter-output>
+    <line>
+      <![CDATA[the cance lbutton is visisble]]>
+    </line>
   </reporter-output>
-  <suite started-at="2024-11-30T11:48:59 IST" name="CrossFunctionalTesting" finished-at="2024-11-30T11:49:24 IST" duration-ms="25285">
+  <suite started-at="2024-12-01T12:00:59 IST" name="CrossFunctionalTesting" finished-at="2024-12-01T12:02:29 IST" duration-ms="89507">
     <groups>
       <group name="smoke">
-        <method signature="TestLeaveList.verifyFilteringLeavesWithEmployeName()[pri:9, instance:test_Cases.TestLeaveList@55141def]" name="verifyFilteringLeavesWithEmployeName" class="test_Cases.TestLeaveList"/>
+        <method signature="TestLeaveList.testCancelLeaveOnleaveListPage()[pri:16, instance:test_Cases.TestLeaveList@55182842]" name="testCancelLeaveOnleaveListPage" class="test_Cases.TestLeaveList"/>
+        <method signature="TestLeaveList.testPIMInfoPage()[pri:15, instance:test_Cases.TestLeaveList@55182842]" name="testPIMInfoPage" class="test_Cases.TestLeaveList"/>
+        <method signature="TestLeaveList.verifyCancelLeaveOnleaveRequestDetails()[pri:14, instance:test_Cases.TestLeaveList@55182842]" name="verifyCancelLeaveOnleaveRequestDetails" class="test_Cases.TestLeaveList"/>
       </group> <!-- smoke -->
     </groups>
-    <test started-at="2024-11-30T11:48:59 IST" name="smokeTest" finished-at="2024-11-30T11:49:24 IST" duration-ms="25285">
+    <test started-at="2024-12-01T12:00:59 IST" name="smokeTest" finished-at="2024-12-01T12:02:29 IST" duration-ms="89507">
       <class name="test_Cases.TestLeaveList">
-        <test-method is-config="true" signature="setup(java.lang.String)[pri:0, instance:test_Cases.TestLeaveList@55141def]" started-at="2024-11-30T11:48:59 IST" name="setup" finished-at="2024-11-30T11:49:09 IST" duration-ms="10180" status="PASS">
+        <test-method is-config="true" signature="setup(java.lang.String)[pri:0, instance:test_Cases.TestLeaveList@55182842]" started-at="2024-12-01T12:00:59 IST" name="setup" finished-at="2024-12-01T12:01:09 IST" duration-ms="10234" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -21,10 +26,43 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setup -->
-        <test-method signature="verifyFilteringLeavesWithEmployeName()[pri:9, instance:test_Cases.TestLeaveList@55141def]" started-at="2024-11-30T11:49:09 IST" name="verifyFilteringLeavesWithEmployeName" description="Verify filtering leaves with employe Name" finished-at="2024-11-30T11:49:24 IST" duration-ms="15074" status="PASS">
+        <test-method signature="verifyCancelLeaveOnleaveRequestDetails()[pri:14, instance:test_Cases.TestLeaveList@55182842]" started-at="2024-12-01T12:01:09 IST" name="verifyCancelLeaveOnleaveRequestDetails" description="Verify cancel leave request details page" finished-at="2024-12-01T12:01:37 IST" duration-ms="27515" status="PASS">
+          <reporter-output>
+            <line>
+              <![CDATA[the cance lbutton is visisble]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- verifyCancelLeaveOnleaveRequestDetails -->
+        <test-method is-config="true" signature="setup(java.lang.String)[pri:0, instance:test_Cases.TestLeaveList@55182842]" started-at="2024-12-01T12:01:37 IST" name="setup" finished-at="2024-12-01T12:01:47 IST" duration-ms="10307" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyFilteringLeavesWithEmployeName -->
+        </test-method> <!-- setup -->
+        <test-method signature="testPIMInfoPage()[pri:15, instance:test_Cases.TestLeaveList@55182842]" started-at="2024-12-01T12:01:47 IST" name="testPIMInfoPage" description="Verify user is on PIm page " finished-at="2024-12-01T12:02:09 IST" duration-ms="21810" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testPIMInfoPage -->
+        <test-method is-config="true" signature="setup(java.lang.String)[pri:0, instance:test_Cases.TestLeaveList@55182842]" started-at="2024-12-01T12:02:09 IST" name="setup" finished-at="2024-12-01T12:02:21 IST" duration-ms="11770" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[chrome]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setup -->
+        <test-method signature="testCancelLeaveOnleaveListPage()[pri:16, instance:test_Cases.TestLeaveList@55182842]" started-at="2024-12-01T12:02:21 IST" name="testCancelLeaveOnleaveListPage" description="Verify cancel leave request details page" finished-at="2024-12-01T12:02:29 IST" duration-ms="7840" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testCancelLeaveOnleaveListPage -->
       </class> <!-- test_Cases.TestLeaveList -->
     </test> <!-- smokeTest -->
   </suite> <!-- CrossFunctionalTesting -->

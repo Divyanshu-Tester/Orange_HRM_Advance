@@ -4,18 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Reporter;
+
 import Utilities.BrowserUtilities;
 import pageObjects.Profile.Dynamic_Profile;
 
 public class LeaveListPage extends BrowserUtilities {
 
 	public WebDriver driver;
-	Dynamic_Profile profile= new Dynamic_Profile(driver);
+	Dynamic_Profile profile = new Dynamic_Profile(driver);
 
 	public LeaveListPage(WebDriver driver) {
 		// TODO Auto-generated constructor stub
@@ -109,14 +112,15 @@ public class LeaveListPage extends BrowserUtilities {
 	@FindBy(xpath = ("(//div[contains(@class,'oxd-select-text--active')])[2]"))
 	WebElement clickSelectLeaveType;
 
-	// @FindBy(xpath="//div[contains(@class,'oxd-autocomplete-text-input--active')]")
-	// WebElement clickOnEmpField;
 
 	@FindBy(xpath = "//div[@class='oxd-autocomplete-wrapper']/div/input")
 	WebElement clickOnEmpField;
 
 	@FindBy(xpath = "//div[@class='oxd-table-cell-actions']/li/button/i")
 	WebElement actionMenuOption;
+
+	@FindBy(xpath = "//div[@class='oxd-table-cell-actions']/li/button/i")
+	List<WebElement> actionMenuOptionList;
 
 	@FindBy(xpath = "//ul[@class='oxd-dropdown-menu']/li[1]/p")
 	WebElement addComment;
@@ -155,7 +159,7 @@ public class LeaveListPage extends BrowserUtilities {
 	WebElement leaveType;
 
 	@FindBy(xpath = "//div[@class='oxd-table-card'] //div[contains(@class,'oxd-table-row--with-border')]/div[5]")
-	WebElement leaveStatusRequestDetails;
+	List<WebElement> leaveStatusRequestDetails;
 
 	@FindBy(xpath = "//div[@class='oxd-table-card'] //div[contains(@class,'oxd-table-row--with-border')]/div[6]")
 	WebElement getComment;
@@ -166,8 +170,18 @@ public class LeaveListPage extends BrowserUtilities {
 	@FindBy(xpath = "//button[normalize-space()='Back']")
 	WebElement back;
 
-	@FindBy(xpath = "//ul[@class='oxd-dropdown-menu']/li[2]/p")
-	WebElement cancelLeaveRequestDetails;
+	// Locator for the leave rows in the leave list table
+	@FindBy(xpath = "//div[@class='oxd-table-card']//div[contains(@class,'oxd-table-row--with-border')]")
+	private List<WebElement> leaveRows;
+	
+	
+	//locator to get PIM tiltle
+	@FindBy(xpath="//h6[contains(@class,'oxd-topbar-header-breadcrumb-module')]")
+	WebElement  PIMTitle;
+	
+	
+	@FindBy(xpath="//div[@class='orangehrm-edit-employee-name']/h6")
+	WebElement getFisrtName;
 
 	public String leavePageLoaded() {
 		waitElementToVisible(driver, 2, leave);
@@ -239,20 +253,20 @@ public class LeaveListPage extends BrowserUtilities {
 	public List<WebElement> getLeaveRecords() throws InterruptedException {
 		Thread.sleep(2000);
 		// Check if the list is empty before waiting for elements
-	    if (leaveRecordCount.isEmpty()) {
-	        return new ArrayList<>();
-	    }
+		if (leaveRecordCount.isEmpty()) {
+			return new ArrayList<>();
+		}
 
-	    try {
-	        // Wait for elements to be visible only if the list is not empty
-	        waitForElementsVisible(driver, 3, leaveRecordCount);
+		try {
+			// Wait for elements to be visible only if the list is not empty
+			waitForElementsVisible(driver, 3, leaveRecordCount);
 
-	        // If the list size is not zero, return the list
-	        return leaveRecordCount;
-	    } catch (TimeoutException e) {
-	        // If a TimeoutException occurs, return an empty list
-	        return new ArrayList<>();
-	    }
+			// If the list size is not zero, return the list
+			return leaveRecordCount;
+		} catch (TimeoutException e) {
+			// If a TimeoutException occurs, return an empty list
+			return new ArrayList<>();
+		}
 	}
 
 	public String getSelectedLeaveStatus() {
@@ -333,31 +347,35 @@ public class LeaveListPage extends BrowserUtilities {
 	}
 
 	public void searchWithEmployeeName(String emplyName) {
-	String empArr[]=	emplyName.split(" ");
+		String empArr[] = emplyName.split(" ");
 		clickOnEmpField.click();
 		System.out.println("empyname" + empArr[0]);
 		clickOnEmpField.sendKeys(empArr[0]);
 		waitForElementsVisible(driver, 3, EmploysList);
 		System.out.println("size of emply" + EmploysList.size());
-		
-		for(WebElement list:EmploysList) {
-			if(list.getText().contains(empArr[0])){
+
+		for (WebElement list : EmploysList) {
+			if (list.getText().contains(empArr[0])) {
 				list.click();
 				break;
 			}
 		}
 
-		//WebElement targetElement = EmploysList.stream().peek(e -> System.out.println("Element found: " + e.getText()))
-			//	.filter(s -> s.getText().trim().toLowerCase().contains(emplyName.trim().toLowerCase()))
-			//	.peek(e -> System.out.println("Filtered element text: " + e.getText())).findAny()
-			//	.orElseThrow(() -> new NoSuchElementException("No element found with name: " + emplyName));
-	
-	//	targetElement.click();
+		// WebElement targetElement = EmploysList.stream().peek(e ->
+		// System.out.println("Element found: " + e.getText()))
+		// .filter(s ->
+		// s.getText().trim().toLowerCase().contains(emplyName.trim().toLowerCase()))
+		// .peek(e -> System.out.println("Filtered element text: " +
+		// e.getText())).findAny()
+		// .orElseThrow(() -> new NoSuchElementException("No element found with name: "
+		// + emplyName));
+
+		// targetElement.click();
 	}
 
 	public boolean verifyAllRecordsWithEmployName(String empyName) {
 		// TODO Auto-generated method stub
-		String empArr[]=	empyName.split(" ");
+		String empArr[] = empyName.split(" ");
 		boolean allRecord = true;
 		try {
 			waitForElementsVisible(driver, 2, totalLeavesWithEmpyName);
@@ -405,6 +423,11 @@ public class LeaveListPage extends BrowserUtilities {
 	public void clickViewDetailsOption() {
 		waitElementToBeClickable(driver, 2, viewLeaveDetails);
 		viewLeaveDetails.click();
+	}
+	
+	public void clickViewPIMInfo() {
+		waitElementToBeClickable(driver, 2, viewPimInfo);
+		viewPimInfo.click();
 	}
 
 	// REQUEST DETAILS PGE
@@ -466,28 +489,91 @@ public class LeaveListPage extends BrowserUtilities {
 		comments.click();
 	}
 
-	
-
-	public void cancelLeave() {
-	waitElementToVisible(driver,2,leaveStatusRequestDetails);
-		if (leaveStatusRequestDetails.getText() != "Cancelled") {
-			waitElementToBeClickable(driver,2,cancelLeaveRequestDetails);
-			cancelLeaveRequestDetails.click();
-		}
-	}
-
 	public String getLeaveStatusOnRequestDetails() {
 		try {
-			waitElementToVisible(driver,2,leaveStatusRequestDetails);
-			return leaveStatusRequestDetails.getText();
+			waitForElementsVisible(driver, 2, leaveStatusRequestDetails);
+			for (WebElement leaveStatus : leaveStatusRequestDetails) {
+				if (leaveStatus.getText().equals("Cancelled")) {
+					return leaveStatus.getText();
+
+				}
+
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return null;
+
 		}
+		return null;
 	}
 
 	public void getBackBtn() {
 		back.click();
 	}
+
+	// method to get the leave status
+	public String getLeaveStatus(WebElement row) {
+		return row.findElement(By.xpath(".//div[5]")).getText();
+	}
+
+	// Method to click "More Options" button for a given leave row
+	public void clickMoreOptionsOnRequestDetails(WebElement row) {
+		
+		WebElement moreOptionsButton = row.findElement(By.xpath(".//button[contains(@class,'oxd-icon-button')]"));
+		waitElementToBeClickable(driver, 2, moreOptionsButton);
+		moreOptionsButton.click();
+	}
+
+	public void cancelLeave(WebElement row) throws InterruptedException {
+		scrollPage(0, 400, driver);
+		Thread.sleep(2000);
+		//waitForPageToLoad(driver,5);
+		waitElementToBeClickable(driver,3,driver.findElement(By.xpath(".//ul[@class='oxd-dropdown-menu']/li[2]/p")));
+		System.out.println("cancl btn");
+		WebElement cancelButton = row.findElement(By.xpath(".//ul[@class='oxd-dropdown-menu']/li[2]/p"));
+	
+		
+		
+		if (cancelButton.isDisplayed()) {
+			Reporter.log("the cance lbutton is visisble", true);
+			waitElementToBeClickable(driver, 4, cancelButton);
+			cancelButton.click();
+			System.out.println("Leave has been canceled.");
+		} else {
+			System.out.println("Cancel button not found for this leave.");
+		}
+	}
+
+	// Method to process all "Pending" leaves: Check status, click More Options, and
+	// cancel
+	public void cancelPendingLeaves() throws InterruptedException {
+		waitForElementsVisible(driver, 2, leaveRows);
+		for (WebElement row : leaveRows) {
+			String status = getLeaveStatus(row);
+			if (status.equals("Pending Approval")) {
+				// Click "More Options"
+				clickMoreOptionsOnRequestDetails(row);
+
+				// Cancel the leave if the Cancel button is displayed
+				cancelLeave(row);
+				break;
+			}
+		}
+	}
+	
+	public String verifyPIMPageLoaded() {
+		waitElementToVisible(driver,2,PIMTitle);
+		return PIMTitle.getText();
+	}
+	
+	public String getPIMEmployeeName() {
+		return getFisrtName.getText();
+	}
+	
+	public void clickCancelLeaveOptionOnListPage() {
+		waitElementToBeClickable(driver,2,cancelLeave);
+		cancelLeave.click();
+	}
+	
+	
 
 }

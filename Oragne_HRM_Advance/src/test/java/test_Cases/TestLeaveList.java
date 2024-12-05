@@ -5,6 +5,7 @@ import java.util.List;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.Reporter;
 import org.testng.annotations.Test;
 import Utilities.ConfigReader;
 import base_Class.Base_Class;
@@ -236,7 +237,8 @@ public class TestLeaveList extends Base_Class {
 
 	}
 
-	@Test(groups= {"smoke"},priority = 9, enabled = true, description = "Verify filtering leaves with employe Name")
+	@Test(groups = {
+			"smoke" }, priority = 9, enabled = false, description = "Verify filtering leaves with employe Name")
 	public void verifyFilteringLeavesWithEmployeName() throws InterruptedException {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
@@ -255,7 +257,7 @@ public class TestLeaveList extends Base_Class {
 			Assert.fail("No records found with the selected filter criteria.");
 		} else {
 			Assert.assertTrue(leaveListPage.verifyAllRecordsWithEmployName(profileName.usrName()),
-					"Not all records have the expected leave type: "+profileName.usrName());
+					"Not all records have the expected leave type: " + profileName.usrName());
 		}
 
 	}
@@ -349,7 +351,7 @@ public class TestLeaveList extends Base_Class {
 	}
 
 	@Test(groups = { "smoke" }, priority = 13, enabled = false, description = "Verify leave request details page")
-	public void verifyCommentsOnleaveRequestDetails() throws InterruptedException {
+	public void verifyCommentsBtnOnleaveRequestDetails() throws InterruptedException {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
 		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
@@ -375,50 +377,90 @@ public class TestLeaveList extends Base_Class {
 
 	}
 
-	@Test(groups = { "smoke" }, priority = 14, enabled = false, description = "Verify leave request details page")
+	@Test(groups = { "smoke" }, priority = 14, enabled = true, description = "Verify cancel leave request details page")
 	public void verifyCancelLeaveOnleaveRequestDetails() throws InterruptedException {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
 		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
 
-		
-		// **Act**: cancel Leave on Leave request details pge
-		if (leaveListPage.getLeaveRecords().size() != 0) {
-			leaveListPage.clickMoreOptionBtn();
-			leaveListPage.clickViewDetailsOption();
-			Assert.assertEquals(leaveListPage.verifyLeaveRequestDetailsLoads(), "Leave Request Details",
-					"Leave request details did not load");
-		} else {
-			Assert.assertTrue(leaveListPage.getLeaveRecords().isEmpty(), "no record found");
+		// apply leave
+		if (leaveListPage.getLeaveRecords().size() == 0) {
+			leaveListPage.clickOnApplyTab();
+			Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
+
+			applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
+					ConfigReader.getConfigPropertyData("endDateCancelled"),
+					ConfigReader.getConfigPropertyData("monthNameCancelled"));
+			dashboardPage.clickOnLeaveTab();
 		}
+
 		leaveListPage.clickMoreOptionBtn();
-		leaveListPage.cancelLeave();
-		
+		leaveListPage.clickViewDetailsOption();
+		Assert.assertEquals(leaveListPage.verifyLeaveRequestDetailsLoads(), "Leave Request Details",
+				"Leave request details did not load");
+		// leaveListPage.clickMoreOptionBtn();
+		leaveListPage.cancelPendingLeaves();
+
 		// **Assert**: verify that leave is cancelled successfully
 		Assert.assertEquals(leaveListPage.getLeaveStatusOnRequestDetails(), "Cancelled");
 
-	}
-
-	@Test(groups = { "smoke" }, priority = 15, enabled = false, description = "Verify leave request details page")
-	public void verifyBackClickOnleaveRequestDetails() throws InterruptedException {
-		// **Arrange**: Navigate to Leave List Page and enter a specific date range
-		dashboardPage.clickOnLeaveTab();
-		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
-
-		// **Act**: add Comment
-		if (leaveListPage.getLeaveRecords().size() != 0) {
-			leaveListPage.clickMoreOptionBtn();
-			leaveListPage.clickViewDetailsOption();
-			Assert.assertEquals(leaveListPage.verifyLeaveRequestDetailsLoads(), "Leave Request Details",
-					"Leave request details did not load");
-
-		} else {
-			Assert.assertTrue(leaveListPage.getLeaveRecords().isEmpty(), "no record found");
-		}
-
+		// redirect to leave list page
 		leaveListPage.getBackBtn();
 
 		// **Assert**: verify that user back to Leave List page
 		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
 	}
-}
+
+	@Test(groups = {"smoke" }, priority = 15, enabled = true, description = "Verify user is on PIm page ")
+	public void testPIMInfoPage() throws InterruptedException {
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		// apply leave
+		if (leaveListPage.getLeaveRecords().size() == 0) {
+			leaveListPage.clickOnApplyTab();
+			Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
+
+			applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
+					ConfigReader.getConfigPropertyData("endDateCancelled"),
+					ConfigReader.getConfigPropertyData("monthNameCancelled"));
+			dashboardPage.clickOnLeaveTab();
+		}
+		
+		leaveListPage.clickMoreOptionBtn();
+		leaveListPage.clickViewPIMInfo();
+		Assert.assertEquals(leaveListPage.verifyPIMPageLoaded(),"PIM","PIM Page did not loaded");
+	System.out.println("Employe Name on PIM"+" "+ 	leaveListPage.getPIMEmployeeName());
+
+	}
+	
+	
+	@Test(groups = { "smoke" }, priority = 16, enabled = true, description = "Verify cancel leave request details page")
+	public void testCancelLeaveOnleaveListPage() throws InterruptedException {
+		// **Arrange**: Navigate to Leave List Page and enter a specific date range
+		dashboardPage.clickOnLeaveTab();
+		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
+
+		// apply leave
+		if (leaveListPage.getLeaveRecords().size() == 0) {
+			leaveListPage.clickOnApplyTab();
+			Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
+
+			applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
+					ConfigReader.getConfigPropertyData("endDateCancelled"),
+					ConfigReader.getConfigPropertyData("monthNameCancelled"));
+			dashboardPage.clickOnLeaveTab();
+		}
+		//Act:: click on cancel button to cancel the leave
+		leaveListPage.clickMoreOptionBtn();
+		leaveListPage.clickCancelLeaveOptionOnListPage();
+		
+		
+		//Assert:: verify that leave is cancelled ;
+				Assert.assertEquals(leaveListPage.getSucessMessage(), "Successfully Updated", "sucessfull message did not come");
+			}
+
+	}
+
+
