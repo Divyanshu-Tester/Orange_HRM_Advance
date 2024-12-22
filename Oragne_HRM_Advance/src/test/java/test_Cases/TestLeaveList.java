@@ -238,7 +238,7 @@ public class TestLeaveList extends Base_Class {
 	}
 
 	@Test(groups = {
-			"smoke" }, priority = 9, enabled = false, description = "Verify filtering leaves with employe Name")
+			"smoke" }, priority = 9, enabled = true, description = "Verify filtering leaves with employe Name")
 	public void verifyFilteringLeavesWithEmployeName() throws InterruptedException {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
@@ -290,7 +290,7 @@ public class TestLeaveList extends Base_Class {
 		Assert.assertEquals(leaveListPage.getSucessMessage(), "Successfully Saved", "sucessfull message did not come");
 	}
 
-	@Test(groups = { "smoke" }, priority = 11, enabled = false, description = "Verify leave request details page")
+	@Test(groups = { "smoke" }, priority = 11, enabled = true, description = "Verify leave request details page")
 	public void verifyleaveRequestDetails() throws InterruptedException {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range
 		dashboardPage.clickOnLeaveTab();
@@ -350,6 +350,7 @@ public class TestLeaveList extends Base_Class {
 		Assert.assertEquals(leaveListPage.getSucessMessage(), "Successfully Saved", "sucessfull message did not come");
 	}
 
+	//this one need to debug
 	@Test(groups = { "smoke" }, priority = 13, enabled = false, description = "Verify leave request details page")
 	public void verifyCommentsBtnOnleaveRequestDetails() throws InterruptedException {
 		// **Arrange**: Navigate to Leave List Page and enter a specific date range

@@ -14,13 +14,13 @@ public class TC_Login_001 extends Base_Class //IMPORTING BASE CLASS TO LAUNCH TH
   {
 	  //INITIALIZING LOGIN PAGE CLASS
 	 
-	  Login_Page_Objects Login_Page = new Login_Page_Objects(driver);
+//	  Login_Page_Objects Login_Page = new Login_Page_Objects(driver);
 	  
 	  //CALLING RE-USABLE METHODS FROM LOGIN_PAGE 
 	  
-	  Login_Page.Default_Username("Admin");
-	  Login_Page.Default_Password("admin123");
-	  Login_Page.Click_Login();
+	  loginPage.Default_Username("Admin");
+	  loginPage.Default_Password("admin123");
+	loginPage.Click_Login();
 	  
 	  
 	  

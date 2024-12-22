@@ -13,6 +13,7 @@ public class Page_Object_Dashboard extends BrowserUtilities{
 		public WebDriver driver;
 
 		public Page_Object_Dashboard(WebDriver driver) {
+			super(driver);
 			this.driver = driver;
 			// driver argument means that this driver will be used to lok yp elements and
 			// second
@@ -27,14 +28,22 @@ public class Page_Object_Dashboard extends BrowserUtilities{
 		@FindBy(xpath="//ul[@class='oxd-main-menu']/li[3]/a")
 		WebElement leaveBtn;
 		
+		@FindBy(linkText="Directory")
+		WebElement directory;
+		
 		public String dashboardLoaded() {
-			waitElementToVisible(driver,2,dashboard);
+			waitElementToVisible(driver,3,dashboard);
 			return	dashboard.getText();
 		}
 		
 		public void clickOnLeaveTab() {
 			staticWait(2);
 			leaveBtn.click();
+		}
+		
+		public void clickDirectoryTab() {
+			
+			directory.click();
 		}
 
 	}

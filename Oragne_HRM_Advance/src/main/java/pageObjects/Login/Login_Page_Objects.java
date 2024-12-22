@@ -20,7 +20,7 @@ public class Login_Page_Objects
 	//CREATING CONSTRUCTOR TO INITIALIZE THE WEBDRIVER
 
 	public Login_Page_Objects(WebDriver driver)
-	{
+	{//System.out.print("instance of driver on login page"+ driver);
 		this.driver = driver;
 		this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 	}

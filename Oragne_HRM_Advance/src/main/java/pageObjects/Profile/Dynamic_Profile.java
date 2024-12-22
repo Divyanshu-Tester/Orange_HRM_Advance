@@ -20,7 +20,7 @@ public class Dynamic_Profile extends Base_Objects
 	public String usrName()
 	{
 		WebElement ClickProfile = wait.until(ExpectedConditions.elementToBeClickable(UserName));
-		ClickProfile.click();
+	//	ClickProfile.click();
 		String captureUSername = ClickProfile.getText();
 		System.out.println("Captured Text Is:"+captureUSername);
 		return captureUSername;

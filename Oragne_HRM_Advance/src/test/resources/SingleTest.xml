@@ -4,15 +4,9 @@
 
   <test thread-count="1" name="smokeTest">
   <parameter name="browserName" value="chrome"></parameter>
-  <groups>
-  <run>
-  <include name="smoke">
-  </include>
-  </run>
-  </groups>
- 
+  
     <classes>
-      <class name="test_Cases.TestLeaveList"/>
+      <class name="test_Cases.TestEntitlements"/>
     
     </classes>
   </test> <!-- Test -->

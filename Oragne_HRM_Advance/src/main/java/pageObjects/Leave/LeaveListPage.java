@@ -13,14 +13,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.Reporter;
 
 import Utilities.BrowserUtilities;
-import pageObjects.Profile.Dynamic_Profile;
+
 
 public class LeaveListPage extends BrowserUtilities {
 
 	public WebDriver driver;
-	Dynamic_Profile profile = new Dynamic_Profile(driver);
+	
 
 	public LeaveListPage(WebDriver driver) {
+		super(driver);
 		// TODO Auto-generated constructor stub
 		this.driver = driver;
 		// driver argument means that this driver will be used to lok yp elements and
@@ -51,6 +52,14 @@ public class LeaveListPage extends BrowserUtilities {
 
 	@FindBy(css = "nav[class='oxd-topbar-body-nav'] ul li:nth-child(1)")
 	WebElement applyLeaveTab;
+
+	@FindBy(css = "nav[class='oxd-topbar-body-nav'] ul li:nth-child(2)")
+	WebElement myLeaveTab;
+	
+	@FindBy(css = "nav[class='oxd-topbar-body-nav'] ul li:nth-child(3)")
+	WebElement entitlementsTab;
+	
+	
 
 	@FindBy(xpath = "//div[@class='oxd-table-card'] //div[contains(@class,'oxd-table-row--with-border')]/div[2]")
 	// "//div[@class='oxd-table-card']
@@ -112,7 +121,6 @@ public class LeaveListPage extends BrowserUtilities {
 	@FindBy(xpath = ("(//div[contains(@class,'oxd-select-text--active')])[2]"))
 	WebElement clickSelectLeaveType;
 
-
 	@FindBy(xpath = "//div[@class='oxd-autocomplete-wrapper']/div/input")
 	WebElement clickOnEmpField;
 
@@ -173,15 +181,16 @@ public class LeaveListPage extends BrowserUtilities {
 	// Locator for the leave rows in the leave list table
 	@FindBy(xpath = "//div[@class='oxd-table-card']//div[contains(@class,'oxd-table-row--with-border')]")
 	private List<WebElement> leaveRows;
+
+	// locator to get PIM tiltle
+	@FindBy(xpath = "//h6[contains(@class,'oxd-topbar-header-breadcrumb-module')]")
+	WebElement PIMTitle;
+
+	@FindBy(xpath = "//div[@class='orangehrm-edit-employee-name']/h6")
+	WebElement getFirstName;
 	
-	
-	//locator to get PIM tiltle
-	@FindBy(xpath="//h6[contains(@class,'oxd-topbar-header-breadcrumb-module')]")
-	WebElement  PIMTitle;
-	
-	
-	@FindBy(xpath="//div[@class='orangehrm-edit-employee-name']/h6")
-	WebElement getFisrtName;
+	@FindBy(xpath="//a[@role='menuitem']")
+	List<WebElement> entitlementOptions;
 
 	public String leavePageLoaded() {
 		waitElementToVisible(driver, 2, leave);
@@ -395,7 +404,7 @@ public class LeaveListPage extends BrowserUtilities {
 
 	// Add Commnet Section
 	public void clickMoreOptionBtn() {
-		waitElementToVisible(driver, 2, actionMenuOption);
+		waitElementToVisible(driver, 3, actionMenuOption);
 		scrollPage(0, 400, driver);
 		actionMenuOption.click();
 	}
@@ -424,7 +433,7 @@ public class LeaveListPage extends BrowserUtilities {
 		waitElementToBeClickable(driver, 2, viewLeaveDetails);
 		viewLeaveDetails.click();
 	}
-	
+
 	public void clickViewPIMInfo() {
 		waitElementToBeClickable(driver, 2, viewPimInfo);
 		viewPimInfo.click();
@@ -477,7 +486,7 @@ public class LeaveListPage extends BrowserUtilities {
 
 	public String getComment() {
 		try {
-			waitElementToVisible(driver, 2, getComment);
+			waitElementToVisible(driver, 3, getComment);
 			return getComment.getText();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -511,28 +520,26 @@ public class LeaveListPage extends BrowserUtilities {
 	}
 
 	// method to get the leave status
-	public String getLeaveStatus(WebElement row) {
+	private String getLeaveStatus(WebElement row) {
 		return row.findElement(By.xpath(".//div[5]")).getText();
 	}
 
 	// Method to click "More Options" button for a given leave row
 	public void clickMoreOptionsOnRequestDetails(WebElement row) {
-		
+
 		WebElement moreOptionsButton = row.findElement(By.xpath(".//button[contains(@class,'oxd-icon-button')]"));
 		waitElementToBeClickable(driver, 2, moreOptionsButton);
 		moreOptionsButton.click();
 	}
 
-	public void cancelLeave(WebElement row) throws InterruptedException {
+	private void cancelLeave(WebElement row) throws InterruptedException {
 		scrollPage(0, 400, driver);
 		Thread.sleep(2000);
-		//waitForPageToLoad(driver,5);
-		waitElementToBeClickable(driver,3,driver.findElement(By.xpath(".//ul[@class='oxd-dropdown-menu']/li[2]/p")));
+		// waitForPageToLoad(driver,5);
+		waitElementToBeClickable(driver, 3, driver.findElement(By.xpath(".//ul[@class='oxd-dropdown-menu']/li[2]/p")));
 		System.out.println("cancl btn");
 		WebElement cancelButton = row.findElement(By.xpath(".//ul[@class='oxd-dropdown-menu']/li[2]/p"));
-	
-		
-		
+
 		if (cancelButton.isDisplayed()) {
 			Reporter.log("the cance lbutton is visisble", true);
 			waitElementToBeClickable(driver, 4, cancelButton);
@@ -559,21 +566,32 @@ public class LeaveListPage extends BrowserUtilities {
 			}
 		}
 	}
-	
+
 	public String verifyPIMPageLoaded() {
-		waitElementToVisible(driver,2,PIMTitle);
+		waitElementToVisible(driver, 2, PIMTitle);
 		return PIMTitle.getText();
 	}
-	
+
 	public String getPIMEmployeeName() {
-		return getFisrtName.getText();
+		waitElementToVisible(driver, 2, getFirstName);
+		return getFirstName.getText();
 	}
-	
+
 	public void clickCancelLeaveOptionOnListPage() {
-		waitElementToBeClickable(driver,2,cancelLeave);
+		waitElementToBeClickable(driver, 2, cancelLeave);
 		cancelLeave.click();
 	}
+
+	public void navigateToMyLeavePage() {
+		waitElementToBeClickable(driver, 2, myLeaveTab);
+		myLeaveTab.click();
+	}
 	
+	public List<WebElement> navigateToEntitlementsPage() {
+		waitElementToBeClickable(driver, 2, entitlementsTab);
+		entitlementsTab.click();
+		return entitlementOptions;
+	}
 	
 
 }

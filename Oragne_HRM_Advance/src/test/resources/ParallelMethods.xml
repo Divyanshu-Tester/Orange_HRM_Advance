@@ -6,12 +6,8 @@
  
   <parameter name="browserName" value="chrome"></parameter>
     <classes>
-      <class name="test_Cases.TestDirectory">
-      <methods>
-      <include name="testSearchEmployeWithValidName"></include>
-      <include name="testContactDetails"></include>
-      </methods>
-      </class>
+      <class name="test_Cases.TestDirectory"/>
+   
     </classes>
   </test> <!-- Test -->
   

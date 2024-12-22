@@ -11,7 +11,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BrowserUtilities {
 	
+	public WebDriver driver;
 	static String selectedmonth ;
+	public BrowserUtilities(WebDriver driver) {
+		// TODO Auto-generated constructor stub
+		this.driver=driver;
+	}
+
 	public static void staticWait(int sleepTimeInSeconds) {
 		try {
 			Thread.sleep(sleepTimeInSeconds * 1000L);
@@ -23,6 +29,13 @@ public class BrowserUtilities {
 	public void waitElementToVisible(WebDriver driver, int time, WebElement element) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
 		wait.until(ExpectedConditions.visibilityOf(element));
+	
+	}
+	
+	public void waitElementToVisible(int time, WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+		wait.until(ExpectedConditions.visibilityOf(element));
+	
 	}
 	
 	public void waitForInvisibility(WebDriver driver,int time, WebElement element) {
