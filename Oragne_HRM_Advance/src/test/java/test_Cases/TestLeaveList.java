@@ -1,25 +1,35 @@
 package test_Cases;
 
-import java.util.List;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import Utilities.ConfigReader;
 import base_Class.Base_Class;
 import pageObjects.Dashboard.Page_Object_Dashboard;
+import pageObjects.Leave.ApplyLeavePage;
 import pageObjects.Leave.LeaveListPage;
 
-public class TestLeaveList extends Base_Class {
+public class TestLeaveList extends Base_Class 
+
+{
 
 	static String comment = "please approve my leave";
+	private Page_Object_Dashboard dashboardPage;
+	private LeaveListPage leaveListPage;
+    private ApplyLeavePage applyLeavePage;
 
+ 
+
+	@SuppressWarnings("null")
 	@Test(priority = 0, enabled = true, description = "verify that leave list page loads successfully with no records")
-	public void verifyLeaveListPageShowsNoRecords() throws InterruptedException {
+	public void verifyLeaveListPageShowsNoRecords() throws InterruptedException 
+	
+	{
+		Page_Object_Dashboard dashboardPage = null;
 		// **Arrange**: setup done in @beforeMethod
 		dashboardPage.clickOnLeaveTab();
 
+		LeaveListPage leaveListPage = null;
 		// **Act**: Perform action to load Leave List page
 		String leavePageTitle = leaveListPage.leavePageLoaded();
 		String noRecordsMessage = leaveListPage.leaveListPageNoRecordMessage().trim();
@@ -32,24 +42,29 @@ public class TestLeaveList extends Base_Class {
 
 	@Test(priority = 1, enabled = true, description = "verify that leave list page loads successfully with records")
 	public void verifyLeaveListPageShowsRecords() throws InterruptedException {
+        // Arrange
+        dashboardPage.clickOnLeaveTab();
+        Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
 
-		// **Arrange**: Set up by applying a leave
-		dashboardPage.clickOnLeaveTab();
-		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
-		leaveListPage.clickOnApplyTab();
-		Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
+        leaveListPage.clickOnApplyTab();
+        applyLeavePage = new ApplyLeavePage(driver);
+        Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
 
-		// apply leave
-		applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
-				ConfigReader.getConfigPropertyData("endDateCancelled"),
-				ConfigReader.getConfigPropertyData("monthName"));
+        // Act: Apply leave
+        applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),
+                   ConfigReader.getConfigPropertyData("endDateCancelled"),
+                   ConfigReader.getConfigPropertyData("monthName"));
 
-		// **Act**: Navigate back to Leave List and fetch records
-		dashboardPage.clickOnLeaveTab();
+        // Assert: Navigate back to Leave List and verify records
+        dashboardPage.clickOnLeaveTab();
+        Assert.assertTrue(leaveListPage.leaveListPageWithRecords(), "No one has applied the leave");
+    }
 
-		// **Assert**: Verify that leave records are present
-		Assert.assertTrue(leaveListPage.leaveListPageWithRecords(), "No one has applied the leave ");
+	
 
+	private void applyLeave(String configPropertyData, String configPropertyData2, String configPropertyData3) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Test(priority = 2, enabled = true, description = "verify date range filter with no records")
@@ -75,7 +90,7 @@ public class TestLeaveList extends Base_Class {
 		dashboardPage.clickOnLeaveTab();
 		Assert.assertEquals(leaveListPage.leavePageLoaded(), "Leave", "Leave page did not load successfully!");
 		leaveListPage.clickOnApplyTab();
-		Assert.assertEquals(applyLeavePage.applyleavePageLoaded(), "Apply Leave", "Apply Leave page did not load!");
+		Assert.assertEquals(((Object) applyLeavePage), "Apply Leave", "Apply Leave page did not load!");
 
 		// apply leave
 		applyLeave(ConfigReader.getConfigPropertyData("startDateCancelled"),

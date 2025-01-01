@@ -27,6 +27,9 @@ public class Page_Object_Dashboard extends BrowserUtilities{
 		@FindBy(xpath="//ul[@class='oxd-main-menu']/li[3]/a")
 		WebElement leaveBtn;
 		
+		@FindBy(xpath="//a[@class='oxd-main-menu-item active']")
+		WebElement clkPIM;
+		
 		public String dashboardLoaded() {
 			waitElementToVisible(driver,2,dashboard);
 			return	dashboard.getText();
@@ -35,6 +38,12 @@ public class Page_Object_Dashboard extends BrowserUtilities{
 		public void clickOnLeaveTab() {
 			staticWait(2);
 			leaveBtn.click();
+		}
+		
+		public void clickPIM()
+		{
+			waitElementToVisible(driver,2,clkPIM);
+			clkPIM.click();
 		}
 
 	}

@@ -11,11 +11,16 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import Utilities.BrowserUtilities;
 
-public class LeaveListPage extends BrowserUtilities {
+public class LeaveListPage extends BrowserUtilities
+
+{
 
 	public WebDriver driver;
 
-	public LeaveListPage(WebDriver driver) {
+	public LeaveListPage(WebDriver driver) 
+	
+	
+	{
 		// TODO Auto-generated constructor stub
 		this.driver = driver;
 		// driver argument means that this driver will be used to lok yp elements and

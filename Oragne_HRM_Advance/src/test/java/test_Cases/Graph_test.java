@@ -11,7 +11,7 @@ public class Graph_test extends Base_Class
 
 {
   @Test
-  public void f() 
+  public void f() throws InterruptedException 
   
   {
 	  Login_Page_Objects Login = new Login_Page_Objects(driver);

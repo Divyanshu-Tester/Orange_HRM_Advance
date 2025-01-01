@@ -1,0 +1,10 @@
+<!ELEMENT Appenders (File,Loggers)>
+<!ELEMENT File (PaternLayout)>
+<!ATTLIST File name NMTOKEN #REQUIRED>
+<!ATTLIST File fileName CDATA #REQUIRED>
+<!ELEMENT PaternLayout (#PCDATA)>
+<!ELEMENT Loggers (Root)>
+<!ELEMENT Root (AppenderRef+)>
+<!ATTLIST Root level NMTOKEN #REQUIRED>
+<!ELEMENT AppenderRef EMPTY>
+<!ATTLIST AppenderRef ref NMTOKEN #REQUIRED>

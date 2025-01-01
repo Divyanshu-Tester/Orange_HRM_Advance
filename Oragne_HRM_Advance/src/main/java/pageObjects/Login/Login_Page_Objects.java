@@ -32,24 +32,37 @@ public class Login_Page_Objects
 	private By Default_Password = By.xpath("//input[@placeholder='Password']");                                               // PASSWORD
 	private By Login_Button = By.xpath("//button[@type='submit']");
 	private By Forget_Password = By.xpath("//p[@class='oxd-text oxd-text--p orangehrm-login-forgot-header']");        //FORGET PASSOWORD
-<<<<<<< HEAD
 
-=======
+
+
 	
 	
-	public void loadLoginPage() {
+	public void loadLoginPage() 
+	
+
+	{
 		driver.get(ConfigReader.getConfigPropertyData("url"));
 	}
->>>>>>> refs/remotes/origin/master
+
+	
+
+	{
+		
+	}
 	//RE-USABLE METHOD FOR USERNAME
 
-	public void Default_Username(String username)
+	public void Default_Username(String username) throws InterruptedException
 	{
 		@SuppressWarnings("unused")
 		WebElement Wait_Username= ((FluentWait<WebDriver>) wait).until(ExpectedConditions.visibilityOfElementLocated(Default_User_Name_Field));
 		Wait_Username.click();
+		
+		
 		driver.findElement(Default_User_Name_Field).clear();
 		driver.findElement(Default_User_Name_Field).sendKeys(username);
+		Thread.sleep(5000);
+		String enteredText = Wait_Username.getText();
+	    System.out.println("The Entered Username is: " + enteredText);
 
 
 	}
@@ -67,13 +80,9 @@ public class Login_Page_Objects
 	}
 
 	//RE-USABLE METHOD TO CLICK ON LOGIN BUTTON
-<<<<<<< HEAD
-
-	public void Click_Login()
-=======
 	
 	public Page_Object_Dashboard Click_Login()
->>>>>>> refs/remotes/origin/master
+
 	{
 		driver.findElement(Login_Button).click();
 		Page_Object_Dashboard dashboardPage= new Page_Object_Dashboard(driver);
@@ -87,11 +96,13 @@ public class Login_Page_Objects
 		driver.findElement(Forget_Password).click();
 	}
 
-	public void directLogin(String username , String password)
+	public void directLogin(String username , String password) throws InterruptedException
 	{
 		Default_Username(username);
 		dfltPassword(password);
 		Click_Login();
 		
 	}
+	
+	
 }

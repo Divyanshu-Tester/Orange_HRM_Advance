@@ -2,24 +2,24 @@ package pageObjects.Leave;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Utilities.BrowserUtilities;
 
-public class ApplyLeavePage extends BrowserUtilities{
+public class ApplyLeavePage extends BrowserUtilities
+
+{
 	public WebDriver driver;
    public  WebDriverWait wait;
 
 
-	public ApplyLeavePage(WebDriver driver) {
+	public ApplyLeavePage(WebDriver driver) 
+	
+	{
 		// TODO Auto-generated constructor stub
 		this.driver = driver;
 		// driver argument means that this driver will be used to lok yp elements and
@@ -67,7 +67,9 @@ public class ApplyLeavePage extends BrowserUtilities{
     @FindBy(xpath = "//button[@type='submit']")
 	WebElement submitBtn;
 	
-	public String applyleavePageLoaded() {
+	public String applyleavePageLoaded()
+	
+	{
 		waitElementToVisible(driver, 2, applyLeaveTitle);
 		return applyLeaveTitle.getText();
 	}
