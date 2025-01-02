@@ -14,33 +14,31 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
+
 import Utilities.ConfigReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import io.opentelemetry.sdk.metrics.internal.data.ImmutableGaugeData;
 
 public class DriverFactory {
 
-public WebDriver driver;
-	public String browserName;
-	private static final ThreadLocal<WebDriver> threadLocal = new ThreadLocal<>();
+//protected static WebDriver driver;
+	private static String browserName;
+	private static volatile DriverFactory instance;
+	private static ThreadLocal<WebDriver> tlDriver= new ThreadLocal();
+	
+	private DriverFactory() {};
 
-	public WebDriver getDriver(String browser) throws IOException {
-
-		// browserName= PropertyReaderHelper.getConfigPropertyData("browser");
-
+	private  void initDriver(String browser) {
 		// Check if browser parameter is passed from TestNG, else fallback to properties
-		// file
+	
 		browserName = (browser != null) ? browser : ConfigReader.getConfigPropertyData("browser");
-		//WebDriver driver = null;
-		if (threadLocal.get() == null) {
 		if (browserName.equalsIgnoreCase("chrome")) {
 
 			ChromeOptions options = new ChromeOptions();
 			Map<String, Object> map = new HashMap<>();
 			map.put("credentials_enable_service", false); // Disabling password manager service
 			map.put("profile.password_manager_enabled", false);
-			// Disable autofill for addresses
-			map.put("autofill.profile_enabled", false);
+			map.put("autofill.profile_enabled", false); // Disable autofill for addresses
 
 			// To disbale the images on website just to speed up the process
 			// map.put("profile.managed_default_content_settings.images", 2);
@@ -48,27 +46,27 @@ public WebDriver driver;
 
 			// options.addArguments("--Incognito");
 			WebDriverManager.chromedriver();
-			threadLocal.set(new ChromeDriver(options));
-			
-		//driver.manage().window().maximize();
-			
-		}
-		//	Map<String, Object> networkConditions = new HashMap<>();
-        //    networkConditions.put("offline", false);  // Not offline
-         //   networkConditions.put("latency", 100);  // 100 ms latency
-      //      networkConditions.put("downloadThroughput", 50000);  // 50 KB/s download
-      //      networkConditions.put("uploadThroughput", 30000);    // 30 KB/s upload
+			tlDriver.set(new ChromeDriver(options));
 
-            // Apply the network conditions
-        //    ChromeDriver chromeDriver = (ChromeDriver) driver;
-         //   chromeDriver.executeCdpCommand("Network.emulateNetworkConditions", networkConditions);			}
+			// driver.manage().window().maximize();
+
+		}
+		// Map<String, Object> networkConditions = new HashMap<>();
+		// networkConditions.put("offline", false); // Not offline
+		// networkConditions.put("latency", 100); // 100 ms latency
+		// networkConditions.put("downloadThroughput", 50000); // 50 KB/s download
+		// networkConditions.put("uploadThroughput", 30000); // 30 KB/s upload
+
+		// Apply the network conditions
+		// ChromeDriver chromeDriver = (ChromeDriver) driver;
+		// chromeDriver.executeCdpCommand("Network.emulateNetworkConditions",
+		// networkConditions); }
 
 		else if (browserName.equals("firefox")) {
 			FirefoxOptions options = new FirefoxOptions();
 			// options.addArguments("-private");
 			WebDriverManager.firefoxdriver();
-		threadLocal.set(new FirefoxDriver());
-			// FirefoxProfile profile = new FirefoxProfile();
+			 tlDriver.set(new FirefoxDriver());
 
 		}
 
@@ -77,26 +75,38 @@ public WebDriver driver;
 			EdgeOptions options = new EdgeOptions();
 			// options.addArguments("inprivate");
 			WebDriverManager.edgedriver();
-		//	driver = new EdgeDriver();
+			// driver = new EdgeDriver();
 			// driver.get("https://www.amazon.com/ref=nav_logo");
 		}
-		}
-		return threadLocal.get();
-
 	}
 	
+	
+	public static DriverFactory getDriverInstance(String browser) {
+		if(instance==null) {
+			synchronized(DriverFactory.class){
+				if(instance==null) {
+				instance= new DriverFactory();
+			}}
+		}
+		
+		if(tlDriver.get()==null) {
+			instance.initDriver(browser);
+		}
+		
+		return instance;
+	}
+	
+	
+	public WebDriver getDriver() {
+		return	tlDriver.get();
+	}
+	
+	public static void quit() {
+		if(tlDriver.get()!=null) {
+			tlDriver.get().quit();
+			tlDriver.remove();
+		}
+	}
 
-    public WebDriver getDriver() {
-        return threadLocal.get();
-    }
 	
-	
-	public void tearDown() {
-	    WebDriver driver = threadLocal.get();
-	    if (driver != null) {
-	        driver.quit();
-	        threadLocal.remove(); // Clear the thread-local instance
-	    }
-	
-	
-}}
+}

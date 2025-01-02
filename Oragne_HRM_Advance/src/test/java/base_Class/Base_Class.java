@@ -8,6 +8,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 
+
+
 import Drivers.DriverFactory;
 import Utilities.ConfigReader;
 import pageObjects.Dashboard.Page_Object_Dashboard;
@@ -18,10 +20,12 @@ import pageObjects.Leave.LeaveListPage;
 import pageObjects.Leave.MyLeavePage;
 import pageObjects.Login.Login_Page_Objects;
 import pageObjects.Profile.Dynamic_Profile;
+import pageObjects.Search.SearchPage;
+import test_Cases.SearchPageTest;
 
 //public class Base_Class
 
-public class Base_Class extends DriverFactory {
+public class Base_Class {
 
 	//public WebDriver driver;
 	public LeaveListPage leaveListPage;
@@ -32,13 +36,16 @@ public class Base_Class extends DriverFactory {
 	public MyLeavePage  myLeavePage;
 	public EntitlementsPage entitlementsPage;
 	public Page_Object_Directory directoryObj;
+	public SearchPage searchObj;
+	private WebDriver driver;
 
 	@Parameters("browserName")
-	
+	@BeforeMethod
 	public void setup(String browserName) throws IOException {
 
-		 driver = getDriver(browserName);
-		 driver.manage().deleteAllCookies();
+		
+	 driver=	DriverFactory.getDriverInstance(browserName).getDriver();
+		 //driver.manage().deleteAllCookies();
 		System.out.println("Thread: " + Thread.currentThread().getName() +
 			    ", Driver Instance: " + driver);
 		loginPage = new Login_Page_Objects(driver);
@@ -49,6 +56,7 @@ public class Base_Class extends DriverFactory {
 		myLeavePage= new MyLeavePage(driver);
 		 entitlementsPage= new EntitlementsPage(driver);
 		  directoryObj=new Page_Object_Directory(driver);
+		   searchObj= new SearchPage(driver);
 
 		// **Arrange**: Prepare for each test
 		loginPage.loadLoginPage();
@@ -58,20 +66,7 @@ public class Base_Class extends DriverFactory {
 		Assert.assertEquals(dashboardPage.dashboardLoaded(), "Dashboard", "Dashboard did not load sucessfully");
 
 	}
-	@Parameters("browserName")
-	@BeforeMethod(groups = { "smoke" }, alwaysRun=true)
-	public void setUpApp(String browserName) throws IOException
-	{
-		driver = getDriver(browserName);
-		// **Arrange**: Prepare for each test
-		loginPage = new Login_Page_Objects(driver);
-				loginPage.loadLoginPage();
-				loginPage.Default_Username(ConfigReader.getConfigPropertyData("username"));
-				loginPage.Default_Password(ConfigReader.getConfigPropertyData("password"));
-				dashboardPage = loginPage.Click_Login();
-				Assert.assertEquals(dashboardPage.dashboardLoaded(), "Dashboard", "Dashboard did not load sucessfully");
 
-	}
 
 	// resuable method for apply leave
 	public void applyLeave(String startDate, String endDate, String monthName) throws InterruptedException {
@@ -85,11 +80,10 @@ public class Base_Class extends DriverFactory {
 	
 
 	
-	  @AfterMethod(groups= {"smoke"}, alwaysRun=true) 
-	  public void closeBrowser() { 
-		  tearDown();
-		  }
-	 
+	@AfterMethod()
+	public void quit() {
+		DriverFactory.quit();
+	}
 	 
 
 }
