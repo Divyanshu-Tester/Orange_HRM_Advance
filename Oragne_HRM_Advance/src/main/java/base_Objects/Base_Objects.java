@@ -10,7 +10,7 @@ public class Base_Objects
 
 {
 	protected WebDriver driver;
-	protected WebDriverWait wait;
+	protected static WebDriverWait wait;
 	protected FluentWait<WebDriver>fluentWait;
 
 
