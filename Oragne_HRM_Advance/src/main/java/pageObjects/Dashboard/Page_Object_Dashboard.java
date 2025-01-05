@@ -28,6 +28,9 @@ public class Page_Object_Dashboard extends BrowserUtilities{
 		@FindBy(xpath="//ul[@class='oxd-main-menu']/li[3]/a")
 		WebElement leaveBtn;
 		
+		@FindBy(xpath="//ul[@class='oxd-main-menu']/li[5]/a")
+		WebElement RequirementsBtn;
+		
 		@FindBy(linkText="Directory")
 		WebElement directory;
 		
@@ -45,6 +48,11 @@ public class Page_Object_Dashboard extends BrowserUtilities{
 			
 			directory.click();
 		}
+		
+		
+		public void clickOnRequirementsTab() {
+			waitElementToBeClickable(driver,10,RequirementsBtn);
+			RequirementsBtn.click();		}
 
 	}
 

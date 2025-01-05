@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [CrossFunctionalTesting]" guice-stage="DEVELOPMENT" verbose="6">
-  <test thread-count="5" parallel="methods" name="smokeTest(failed)" verbose="6">
+  <test thread-count="5" name="smokeTest on chrome(failed)" verbose="6">
     <parameter name="browserName" value="chrome"/>
     <classes>
-      <class name="test_Cases.SearchPageTest">
+      <class name="test_Cases.TestRequirementsPage">
         <methods>
           <include name="setup"/>
           <include name="quit"/>
-          <include name="searchFunctionalityTest"/>
+          <include name="validateAddNewCandiadte"/>
         </methods>
-      </class> <!-- test_Cases.SearchPageTest -->
+      </class> <!-- test_Cases.TestRequirementsPage -->
     </classes>
-  </test> <!-- smokeTest(failed) -->
+  </test> <!-- smokeTest on chrome(failed) -->
 </suite> <!-- Failed suite [CrossFunctionalTesting] -->

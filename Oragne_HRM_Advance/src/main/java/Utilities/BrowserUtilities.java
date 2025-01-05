@@ -1,9 +1,16 @@
 package Utilities;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -13,6 +20,12 @@ public class BrowserUtilities {
 	
 	public WebDriver driver;
 	static String selectedmonth ;
+	public static String TESTDATA_SHEET_PATH="C:/Users/Ramita Sambyal/Orange_HRM_Advance/Oragne_HRM_Advance"
+			+ "/src/main/java/com/hrm/qa/testdata/TestData.xlsx";
+	
+	private static XSSFSheet sheet;
+	private static Object[][] data;
+
 	public BrowserUtilities(WebDriver driver) {
 		// TODO Auto-generated constructor stub
 		this.driver=driver;
@@ -90,5 +103,67 @@ public class BrowserUtilities {
 	    new WebDriverWait(driver, Duration.ofSeconds(timeoutInSeconds)).until(
 	        webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete")
 	    );
+	}
+	
+	
+	public Object[][] getTestData(String sheetname) {
+		
+		FileInputStream file = null;
+		try {
+		 file= new FileInputStream(TESTDATA_SHEET_PATH);
+		 System.out.println("path of excel sheet is"+file);
+		}
+		catch(Exception e) {
+			e.getMessage();
+		}
+		
+		XSSFWorkbook workbook = null;
+		try {
+			workbook = new XSSFWorkbook(file);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	int sheetsCount=	workbook.getNumberOfSheets();
+	System.out.println("sheet name is "+ sheetname);
+	for(int i=0;i<sheetsCount;i++) {
+		String sheetName=workbook.getSheetAt(i).getSheetName();
+		if(sheetName.equals(sheetname)) {
+		 sheet=	workbook.getSheetAt(i);
+		 
+		  data=new Object[sheet.getPhysicalNumberOfRows()-1][sheet.getRow(0).getPhysicalNumberOfCells()];
+			int row=sheet.getPhysicalNumberOfRows();
+			System.out.println("count of row"+row);
+			
+			int col=sheet.getRow(0).getPhysicalNumberOfCells();
+			System.out.println("count of col"+col);
+			for(int k=0;k<row-1;k++) {
+				for(int j=0;j<col;j++) {
+				data[k][j]=	sheet.getRow(k+1).getCell(j).toString();
+				System.out.println(data[k][j]);
+				}
+			}
+			
+		
+		}
+		break;
+	}
+	
+	return data;
+		
+		
+		
+	}
+	
+	public void getSingleElementScreenhsot(WebElement element,String Name) throws IOException {
+	File file=	element.getScreenshotAs(OutputType.FILE);
+	FileUtils.copyFile(file, new File(System.getProperty("user.dir")+"/Reports/HTML"+Name+".png"));
+	}
+	
+	
+	public void getHeightWidth(WebElement element) {
+	System.out.println(	element.getRect().getDimension().getHeight());
+	System.out.println(	element.getRect().getDimension().getWidth());
+		
 	}
 }
