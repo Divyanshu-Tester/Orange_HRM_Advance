@@ -38,6 +38,7 @@ public class Login_Page_Objects
 	
 	
 	public void loadLoginPage() {
+		
 		driver.get(ConfigReader.getConfigPropertyData("url"));
 	}
 //>>>>>>> refs/remotes/origin/master
