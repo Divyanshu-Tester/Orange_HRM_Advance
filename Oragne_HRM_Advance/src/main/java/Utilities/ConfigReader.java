@@ -13,7 +13,7 @@ private static Properties prop;
 		 
 		 
 			
-			try (FileInputStream file = new FileInputStream(System.getProperty("user.dir") + "/src/main/resources/config.properties"))
+			try (FileInputStream file = new FileInputStream(System.getProperty("user.dir") + "/src/main/java/com/hrm/qa/config/config.properties"))
 			{
 			    prop.load(file);
 				System.out.println( file.toString());
