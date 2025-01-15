@@ -166,4 +166,23 @@ public class BrowserUtilities {
 	System.out.println(	element.getRect().getDimension().getWidth());
 		
 	}
+	
+	
+	public void uploadFileHelper(String autoItExePath) {
+		try {
+			ProcessBuilder processBuilder = new ProcessBuilder(autoItExePath);
+
+            // Start the process
+            Process process = processBuilder.start();
+
+            // Wait for the AutoIt script to complete (optional)
+            int exitCode = process.waitFor();
+            System.out.println("AutoIt script executed with exit code: " + exitCode);
+
+		} catch (IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException("file not found in mentioned path");
+		}
+	}
 }
