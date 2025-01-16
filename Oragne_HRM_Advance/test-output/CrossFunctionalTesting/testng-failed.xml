@@ -8,7 +8,7 @@
         <methods>
           <include name="setup"/>
           <include name="quit"/>
-          <include name="validateAddNewCandiadte"/>
+          <include name="validateAddNewCandiadte" invocation-numbers="0 1 2"/>
         </methods>
       </class> <!-- test_Cases.TestRequirementsPage -->
     </classes>

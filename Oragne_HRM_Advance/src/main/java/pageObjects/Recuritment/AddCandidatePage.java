@@ -1,6 +1,7 @@
 package pageObjects.Recuritment;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -33,6 +34,9 @@ public class AddCandidatePage extends BrowserUtilities {
 	@FindBy(name = "lastName")
 	WebElement lastName;
 
+	@FindBy(xpath = "(//input[@placeholder='Type here'])[1]")
+	WebElement emailField;
+
 	/*
 	 * @FindBy(xpath="//label[text()='Email']") WebElement email;
 	 */
@@ -46,6 +50,16 @@ public class AddCandidatePage extends BrowserUtilities {
 	@FindBy(xpath = "(//p[contains(@class,'oxd-toast-content-text')])[2]")
 	WebElement getSucessMessage;
 
+	@FindBy(xpath = "//div[@class='oxd-file-input-div']")
+	WebElement uploadFile;
+	
+	
+	@FindBy(xpath="//div[@class='oxd-file-input-div']")
+	WebElement uploadedFileName;
+	
+	
+	
+
 	public String addCandidatePageLoaded() {
 		waitElementToVisible(driver, 2, addCandidatePage);
 		return addCandidatePage.getText();
@@ -56,14 +70,17 @@ public class AddCandidatePage extends BrowserUtilities {
 		firstName.sendKeys(Name);
 		lastName.sendKeys(LastName);
 		// selenium 4 features
-		driver.findElement(RelativeLocator.with(By.tagName("input"))
-				.below(driver.findElement(By.xpath("//label[text()='Email']")))).sendKeys(Email);
-		scrollPage(0, 600, driver);
-		WebElement consent = driver.findElement(By.xpath("//label[text()='Consent to keep data']"));
-		driver.findElement(RelativeLocator.with(By.tagName("i")).toLeftOf(consent)).click();
-		getSingleElementScreenhsot(consent,Name);
-		getHeightWidth(consent);
-	}
+
+		waitElementToVisible(driver, 10, emailField);
+		emailField.sendKeys(Email);
+
+	
+		// scrollPage(0, 600, driver); 
+			/*	 *WebElement consent =driver.findElement(By.xpath("//label[text()='Consent to keep data']")); //
+		 * driver.findElement(RelativeLocator.with(By.tagName("i")).toLeftOf(consent)).
+		 * click(); getSingleElementScreenhsot(consent,Name); getHeightWidth(consent);
+		 */
+		  }
 
 	public void clickSubmit() {
 		// scrollPage(0,600,driver);
@@ -73,6 +90,51 @@ public class AddCandidatePage extends BrowserUtilities {
 	public String getSucessMessage() {
 		waitElementToVisible(driver, 10, getSucessMessage);
 		return getSucessMessage.getText();
+	}
+
+	public void clickResumeUploadBtn(String autoItExePath) throws InterruptedException {
+	//	scrollPage(0,600,driver);
+		waitElementToBeClickable(driver, 10, uploadFile);
+		uploadFile.click();
+		uploadFileHelper(autoItExePath);
+		Thread.sleep(7000);
+		
+		//uploadedFileName.getText();
+	String text=	getErrorMessage();
+		System.out.println(text);
+		
+		
+		
+	}
+	
+	
+	
+	private boolean isErrorMessageDisplayed() {
+	boolean	isDisplayed=false;
+		try {
+			WebElement errorMessage=		driver.findElement(By.xpath("(//span[contains(@class,'oxd-input-field-error-message')])[4]"));
+		waitElementToVisible(10,errorMessage);
+
+		if(errorMessage.isDisplayed()) {
+			isDisplayed=true;
+		}
+		}catch(NoSuchElementException e) {
+			System.out.println("coming to catch");
+			
+		}
+		
+		if(isDisplayed==true) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	private String getErrorMessage() {
+		WebElement errorMessage=		driver.findElement(By.xpath("(//span[contains(@class,'oxd-input-field-error-message')])[4]"));
+		waitElementToVisible(10,errorMessage);
+		return errorMessage.getText();
 	}
 
 }

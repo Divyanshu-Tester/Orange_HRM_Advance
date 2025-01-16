@@ -44,6 +44,7 @@ public class Base_Class {
 	public void setup(String browserName) throws IOException {
 
 		driver = DriverFactory.getDriverInstance(browserName).getDriver();
+		driver.manage().window().maximize();
 		// driver.manage().deleteAllCookies();
 		System.out.println("Thread: " + Thread.currentThread().getName() + ", Driver Instance: " + driver);
 		loginPage = new Login_Page_Objects(driver);
