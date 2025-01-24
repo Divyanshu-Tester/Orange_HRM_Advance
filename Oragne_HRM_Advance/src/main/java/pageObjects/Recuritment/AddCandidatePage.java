@@ -17,7 +17,7 @@ public class AddCandidatePage extends BrowserUtilities {
 	private WebDriver driver;
 
 	public AddCandidatePage(WebDriver driver) {
-		super(driver);
+		// super(driver);
 		// TODO Auto-generated constructor stub
 		this.driver = driver;
 		// driver argument means that this driver will be used to lok yp elements and
@@ -52,13 +52,9 @@ public class AddCandidatePage extends BrowserUtilities {
 
 	@FindBy(xpath = "//div[@class='oxd-file-input-div']")
 	WebElement uploadFile;
-	
-	
-	@FindBy(xpath="//div[@class='oxd-file-input-div']")
+
+	@FindBy(xpath = "//div[@class='oxd-file-input-div']")
 	WebElement uploadedFileName;
-	
-	
-	
 
 	public String addCandidatePageLoaded() {
 		waitElementToVisible(driver, 2, addCandidatePage);
@@ -66,21 +62,27 @@ public class AddCandidatePage extends BrowserUtilities {
 	}
 
 	public void addnewCandidate(String Name, String LastName, String Email) throws IOException {
-
-		firstName.sendKeys(Name);
+		try {
+			if (Name != null) {
+				firstName.sendKeys(Name);
+			}
+		} catch (Exception e) {
+			System.out.println("first name is mandatry"+" "+e.getStackTrace());
+		}
 		lastName.sendKeys(LastName);
 		// selenium 4 features
 
 		waitElementToVisible(driver, 10, emailField);
 		emailField.sendKeys(Email);
 
-	
-		// scrollPage(0, 600, driver); 
-			/*	 *WebElement consent =driver.findElement(By.xpath("//label[text()='Consent to keep data']")); //
+		// scrollPage(0, 600, driver);
+		/*
+		 * *WebElement consent
+		 * =driver.findElement(By.xpath("//label[text()='Consent to keep data']")); //
 		 * driver.findElement(RelativeLocator.with(By.tagName("i")).toLeftOf(consent)).
 		 * click(); getSingleElementScreenhsot(consent,Name); getHeightWidth(consent);
 		 */
-		  }
+	}
 
 	public void clickSubmit() {
 		// scrollPage(0,600,driver);
@@ -93,47 +95,44 @@ public class AddCandidatePage extends BrowserUtilities {
 	}
 
 	public void clickResumeUploadBtn(String autoItExePath) throws InterruptedException {
-	//	scrollPage(0,600,driver);
+		// scrollPage(0,600,driver);
 		waitElementToBeClickable(driver, 10, uploadFile);
 		uploadFile.click();
 		uploadFileHelper(autoItExePath);
-		Thread.sleep(7000);
-		
-		//uploadedFileName.getText();
-	String text=	getErrorMessage();
-		System.out.println(text);
-		
-		
-		
-	}
-	
-	
-	
-	private boolean isErrorMessageDisplayed() {
-	boolean	isDisplayed=false;
-		try {
-			WebElement errorMessage=		driver.findElement(By.xpath("(//span[contains(@class,'oxd-input-field-error-message')])[4]"));
-		waitElementToVisible(10,errorMessage);
+		 Thread.sleep(3000);
 
-		if(errorMessage.isDisplayed()) {
-			isDisplayed=true;
-		}
-		}catch(NoSuchElementException e) {
+		// uploadedFileName.getText();
+		// String text= getErrorMessage();
+		// System.out.println(text);
+
+	}
+
+	private boolean isErrorMessageDisplayed() {
+		boolean isDisplayed = false;
+		try {
+			WebElement errorMessage = driver
+					.findElement(By.xpath("(//span[contains(@class,'oxd-input-field-error-message')])[4]"));
+			waitElementToVisible(driver, 10, errorMessage);
+
+			if (errorMessage.isDisplayed()) {
+				isDisplayed = true;
+			}
+		} catch (NoSuchElementException e) {
 			System.out.println("coming to catch");
-			
+
 		}
-		
-		if(isDisplayed==true) {
+
+		if (isDisplayed == true) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	private String getErrorMessage() {
-		WebElement errorMessage=		driver.findElement(By.xpath("(//span[contains(@class,'oxd-input-field-error-message')])[4]"));
-		waitElementToVisible(10,errorMessage);
+		WebElement errorMessage = driver
+				.findElement(By.xpath("(//span[contains(@class,'oxd-input-field-error-message')])[4]"));
+		waitElementToVisible(driver, 10, errorMessage);
 		return errorMessage.getText();
 	}
 

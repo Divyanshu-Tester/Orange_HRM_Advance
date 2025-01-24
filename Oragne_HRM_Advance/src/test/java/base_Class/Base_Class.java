@@ -38,12 +38,14 @@ public class Base_Class {
 	public SearchPage searchObj;
 	public RecuirmentsPage recPageObj;
 	public WebDriver driver;
+//	private String browser;
 
-	@Parameters("browserName")
+	//@Parameters("browserName")
 	@BeforeMethod
-	public void setup(String browserName) throws IOException {
-
-		driver = DriverFactory.getDriverInstance(browserName).getDriver();
+	public void setup() throws IOException {
+		String browser = (System.getProperty("browser") != null) ? System.getProperty("browser")  : ConfigReader.getConfigPropertyData("browser"); 
+		System.out.println(browser + " browser name is "); 
+		driver = DriverFactory.getDriverInstance(browser).getDriver();
 		driver.manage().window().maximize();
 		// driver.manage().deleteAllCookies();
 		System.out.println("Thread: " + Thread.currentThread().getName() + ", Driver Instance: " + driver);

@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -26,10 +27,7 @@ public class BrowserUtilities {
 	private static XSSFSheet sheet;
 	private static Object[][] data;
 
-	public BrowserUtilities(WebDriver driver) {
-		// TODO Auto-generated constructor stub
-		this.driver=driver;
-	}
+
 
 	public static void staticWait(int sleepTimeInSeconds) {
 		try {
@@ -45,11 +43,13 @@ public class BrowserUtilities {
 	
 	}
 	
-	public void waitElementToVisible(int time, WebElement element) {
-		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
-		wait.until(ExpectedConditions.visibilityOf(element));
-	
-	}
+	/*
+	 * public void waitElementToVisible(int time, WebElement element) {
+	 * WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
+	 * wait.until(ExpectedConditions.visibilityOf(element));
+	 * 
+	 * }
+	 */
 	
 	public void waitForInvisibility(WebDriver driver,int time, WebElement element) {
 	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(time));
@@ -158,6 +158,21 @@ public class BrowserUtilities {
 	public void getSingleElementScreenhsot(WebElement element,String Name) throws IOException {
 	File file=	element.getScreenshotAs(OutputType.FILE);
 	FileUtils.copyFile(file, new File(System.getProperty("user.dir")+"/Reports/HTML"+Name+".png"));
+	}
+	
+	//here we need to do downcasting because web driver does not extent this takesScreenshot
+	//interface 
+	public static String getScreenshot(WebDriver driver,String testcaseName) {
+		TakesScreenshot takeScreenshot=(TakesScreenshot) driver;
+	File screenshotFile=	takeScreenshot.getScreenshotAs(OutputType.FILE);
+	try {
+		FileUtils.copyFile(screenshotFile, new File(System.getProperty("user.dir")+"//Reports2//"+testcaseName+".png"));
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return System.getProperty("user.dir")+"//Reports2//"+testcaseName+".png";
 	}
 	
 	

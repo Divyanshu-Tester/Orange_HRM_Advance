@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="CrossFunctionalTesting" verbose="6">
+<suite name="CrossFunctionalTesting" verbose="6"  parallel="tests" thread-count="2">
 
-  <test  name="smokeTest on chrome" >
-  <parameter name="browserName" value="chrome"></parameter>
+<listeners>
+<listener class-name="utils.Listeners"/>
+</listeners>
+
+  <test  name="dynamic browser test " >
+  <!--// <parameter name="browserName" value="!{systemProperty:browser}" /> -->
   
     <classes>
-      <class name="test_Cases.TestRequirementsPage"/>
+      <class name="test_Cases.SearchPageTest"/>
     <!-- // <class name="test_Cases.SearchPageTest"/>-->
     
     </classes>
@@ -17,11 +21,11 @@
    <parameter name="browserName" value="firefox"></parameter>
   
     <classes>
-      <class name="test_Cases.TestRequirementsPage"/>
+      <class name="test_Cases.SearchPageTest"/>
     
     </classes>
-  </test>  
-  -->
+  </test>  -->
+ 
   
   
 </suite>

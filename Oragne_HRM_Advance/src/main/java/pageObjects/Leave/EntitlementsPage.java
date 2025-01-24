@@ -24,7 +24,7 @@ public class EntitlementsPage extends BrowserUtilities{
 	
 	public WebDriver driver;
 	public EntitlementsPage(WebDriver driver) {
-		super(driver);
+		//super(driver);
 		this.driver = driver;
 		
 	}

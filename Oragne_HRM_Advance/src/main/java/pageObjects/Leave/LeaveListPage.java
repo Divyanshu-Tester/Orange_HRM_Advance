@@ -21,7 +21,7 @@ public class LeaveListPage extends BrowserUtilities {
 	
 
 	public LeaveListPage(WebDriver driver) {
-		super(driver);
+	//	super(driver);
 		// TODO Auto-generated constructor stub
 		this.driver = driver;
 		// driver argument means that this driver will be used to lok yp elements and

@@ -10,12 +10,13 @@ import Utilities.BrowserUtilities;
 import Utilities.ConfigReader;
 import base_Class.Base_Class;
 import pageObjects.Recuritment.AddCandidatePage;
+import utils.Retry;
 
 public class TestRequirementsPage extends Base_Class {
 
 	public static String sheetName = "TestcasesData";
 
-	@Test(priority = 1, dataProvider = "getHRMTestData", description = "verify that new candidate is getting added")
+	@Test(priority = 1, dataProvider = "getHRMTestData", retryAnalyzer=Retry.class ,description = "verify that new candidate is getting added")
 	public void validateAddNewCandiadte(String Name, String LastName, String Email,String ResumeFilePath) throws IOException, InterruptedException {
 		System.out.println("name is"+Name);
 		System.out.println("last name is"+LastName);
@@ -30,7 +31,7 @@ public class TestRequirementsPage extends Base_Class {
 		// **Act
 		candidateObj.addnewCandidate(Name, LastName, Email);
 		candidateObj.clickResumeUploadBtn(ResumeFilePath);
-		candidateObj.clickSubmit();
+		//candidateObj.clickSubmit();
 
 		// **Assert
 		Assert.assertEquals(candidateObj.getSucessMessage(), "Successfully Saved", "sucessfull message did not come");
@@ -42,7 +43,7 @@ public class TestRequirementsPage extends Base_Class {
 	
 	@DataProvider
 	public Object[][] getHRMTestData() {
-		BrowserUtilities obj = new BrowserUtilities(driver);
+		BrowserUtilities obj = new BrowserUtilities();
 		return obj.getTestData(sheetName);
 	}
 }

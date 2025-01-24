@@ -13,7 +13,7 @@ public class Page_Object_Dashboard extends BrowserUtilities{
 		public WebDriver driver;
 
 		public Page_Object_Dashboard(WebDriver driver) {
-			super(driver);
+		//	super(driver);
 			this.driver = driver;
 			// driver argument means that this driver will be used to lok yp elements and
 			// second

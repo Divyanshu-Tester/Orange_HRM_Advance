@@ -31,8 +31,8 @@ public class DriverFactory {
 	private  void initDriver(String browser) {
 		// Check if browser parameter is passed from TestNG, else fallback to properties
 	
-		browserName = (browser != null) ? browser : ConfigReader.getConfigPropertyData("browser");
-		if (browserName.equalsIgnoreCase("chrome")) {
+	//	browserName = (browser != null) ? browser : ConfigReader.getConfigPropertyData("browser");
+		if (browser.equalsIgnoreCase("chrome")) {
 
 			ChromeOptions options = new ChromeOptions();
 			Map<String, Object> map = new HashMap<>();
@@ -62,7 +62,7 @@ public class DriverFactory {
 		// chromeDriver.executeCdpCommand("Network.emulateNetworkConditions",
 		// networkConditions); }
 
-		else if (browserName.equals("firefox")) {
+		else if (browser.equals("firefox")) {
 			FirefoxOptions options = new FirefoxOptions();
 			// options.addArguments("-private");
 			WebDriverManager.firefoxdriver();
@@ -70,7 +70,7 @@ public class DriverFactory {
 
 		}
 
-		else if (browserName.equals("edge")) {
+		else if (browser.equals("edge")) {
 			// Configure Edge options to enable InPrivate browsing
 			EdgeOptions options = new EdgeOptions();
 			// options.addArguments("inprivate");
