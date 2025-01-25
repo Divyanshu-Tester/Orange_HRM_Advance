@@ -17,7 +17,7 @@ public class MyLeavePage extends BrowserUtilities {
 
 	public MyLeavePage(WebDriver driver) {
 		// TODO Auto-generated constructor stub
-		super(driver);
+	//	super(driver);
 		this.driver = driver;
 		// driver argument means that this driver will be used to lok yp elements and
 		// second

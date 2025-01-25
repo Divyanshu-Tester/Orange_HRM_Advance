@@ -13,7 +13,7 @@ public class Page_Object_Directory extends BrowserUtilities {
 
 	public Page_Object_Directory(WebDriver driver) {
 		// TODO Auto-generated constructor stub
-		super(driver);
+		//super(driver);
 		this.driver = driver;
 		// driver argument means that this driver will be used to lok yp elements and
 		// second
@@ -88,7 +88,7 @@ public class Page_Object_Directory extends BrowserUtilities {
 
 	public boolean validateSearchedEmployeeName(String expectedName) {
 		// Locate the element displaying the employee name in the result
-		waitElementToVisible(2, profileName);
+		waitElementToVisible(driver,2, profileName);
 		String actualName = profileName.getText();
 		String actualNameArr[] = actualName.split(" ");
 		System.out.println("actaul name I am getting" + actualNameArr[0]);
@@ -99,16 +99,16 @@ public class Page_Object_Directory extends BrowserUtilities {
 	}
 
 	public void clickProfileCard() {
-		waitElementToVisible(3,profileCard);
+		waitElementToVisible(driver,3,profileCard);
 		profileCard.click();
 	}
 	public String getContactNumber() {
-		waitElementToVisible(3,contactNumber);
+		waitElementToVisible(driver,3,contactNumber);
 		return contactNumber.getText();
 	}
 	
 	public String getContactEmail() {
-		waitElementToVisible(3,contactEmail);
+		waitElementToVisible(driver,3,contactEmail);
 		return contactEmail.getText();
 	}
 	
@@ -119,17 +119,17 @@ public class Page_Object_Directory extends BrowserUtilities {
 
 	public boolean getQRCodeDisplayed() {
 		scrollPage(0, 400, driver);
-		waitElementToVisible(2,qrCode);
+		waitElementToVisible(driver,2,qrCode);
 		return qrCode.isDisplayed();
 	}
 
 	public boolean getPhoneIcon() {
-		waitElementToVisible(3,phoneIcon);
+		waitElementToVisible(driver,3,phoneIcon);
 		return phoneIcon.isDisplayed();
 	}
 
 	public boolean getEmailIcon() {
-		waitElementToVisible(3,emailIcon);
+		waitElementToVisible(driver,3,emailIcon);
 		return emailIcon.isDisplayed();
 	}
 

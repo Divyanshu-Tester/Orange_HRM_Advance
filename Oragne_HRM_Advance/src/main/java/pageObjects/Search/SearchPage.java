@@ -13,7 +13,7 @@ import Utilities.BrowserUtilities;
 public class SearchPage extends BrowserUtilities{
 
 	public SearchPage(WebDriver driver) {
-		super(driver);
+	//	super(driver);
 		// TODO Auto-generated constructor stub
 		this.driver = driver;
 		// driver argument means that this driver will be used to lok yp elements and
